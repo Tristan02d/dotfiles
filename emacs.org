@@ -1,5 +1,6 @@
 #+title: Configuration Emacs
-#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/test-init.el
+#+author: Tristan Riehs
+#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
 * Introduction
 
@@ -80,20 +81,6 @@ dans [[file:./.emacs.d/init.el][init.el]].
 
 #+end_src
 
-** Plein écran
-
-#+begin_src emacs-lisp
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-	      (lambda (frame)
-		(with-selected-frame frame
-		  (tr/set-theme)
-		  ;; Emacs en plein écran (f11) par défaut
-		  (toggle-frame-fullscreen))))
-  (toggle-frame-fullscreen)
-  (tr/set-theme))
-#+end_src
-
 * Raccourcis clavier
 
 #+begin_src emacs-lisp
@@ -146,6 +133,14 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 
 #+end_src
 
+* No littering
+
+#+begin_src emacs-lisp
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering)
+
+#+end_src
+
 * Which-key
 
 #+begin_src emacs-lisp
@@ -184,7 +179,21 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
     )
   )
 
-#+end_src>
+#+end_src
+** Chargement du theme et fenêtre en plein écran
+
+#+begin_src emacs-lisp
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+	      (lambda (frame)
+		(with-selected-frame frame
+		  (tr/set-theme)
+		  ;; Emacs en plein écran (f11) par défaut
+		  (toggle-frame-fullscreen))))
+  (toggle-frame-fullscreen)
+  (tr/set-theme))
+#+end_src
+
 * All the icons
 
 Ce package permet aux autres packages d'afficher des icônes sympas. Lors du premier
@@ -317,6 +326,17 @@ le projet en un simple raccourci clavier.
 
 *NB*: je mets personnellement mes projets dans ~\~/projets/~, si ce n'est pas votre cas,
 pensez à modifier ce paragraphe en conséquences.
+
+* Markdown
+
+/Markdown/ c'est le nom complet de l'extension /.md/.
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+
+#+end_src
 
 * Org
 

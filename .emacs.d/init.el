@@ -6,12 +6,33 @@
 ;; Silence compiler warnings as they can be pretty disruptive
 (setq native-comp-async-report-warnings-errors nil)
 
+;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
+      url-history-file (expand-file-name "url/history" user-emacs-directory))
+
+;; Keep customization settings in a temporary file (thanks Ambrevar!)
+(setq custom-file
+      (if (boundp 'server-socket-dir)
+          (expand-file-name "custom.el" server-socket-dir)
+        (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
+(load custom-file t)
+
 (setq inhibit-startup-message t) ;; Enlever l'écran d'accueil
 (scroll-bar-mode -1)  ;; Enlever la scrollbar
 (tool-bar-mode -1)    ;; Enlever la barre d'outils
 (tooltip-mode -1)     ;; Enlever les tooltips
 (menu-bar-mode -1)    ;; Enlever la barre de menu
 (save-place-mode 1)   ;; Mémoriser le dernier emplacement du curseur
+
+;; Enable line numbers for some modes
+(dolist (mode '(text-mode-hook
+                prog-mode-hook
+                conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+
+;; Override some modes which derive from the above
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Raccourcis clavier
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -21,6 +42,7 @@
 (global-set-key (kbd "M-C-l") 'load-theme)
 (global-set-key (kbd "M-C-v") 'eval-region)
 (global-set-key (kbd "M-C-m") 'vterm)
+(global-set-key (kbd "M-C-s") 'eshell)
 (global-set-key (kbd "M-C-g a") 'org-agenda)
 (global-set-key (kbd "M-C-g c") 'org-capture)
 
@@ -33,16 +55,6 @@
 ;; Mettre automatiquement les parenthèses fermantes
 (electric-pair-mode 1)
 
-;; Enable line numbers for some modes
-(dolist (mode '(text-mode-hook
-                prog-mode-hook
-                conf-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 1))))
-
-;; Override some modes which derive from the above
-(dolist (mode '(org-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
 ;; Initialisation des packages
 (require 'package)
 
@@ -54,26 +66,11 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Initialisation du package "use-package"
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
-
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
-(setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
-      url-history-file (expand-file-name "url/history" user-emacs-directory))
-
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering)
-
-;; Keep customization settings in a temporary file (thanks Ambrevar!)
-(setq custom-file
-      (if (boundp 'server-socket-dir)
-          (expand-file-name "custom.el" server-socket-dir)
-        (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
-(load custom-file t)
 
 ;; Infos sur les raccourcis clavier
 (use-package which-key
@@ -87,7 +84,7 @@
 (use-package solo-jazz-theme)
 
 ;; Récupérer l'heure qu'il est au lancement pour charger un theme en conséquence
-(defun efs/set-theme ()
+(defun tr/set-theme ()
   (setq hour-at-start (decoded-time-hour (decode-time)))
   (if (and (<= 7 hour-at-start)
 	   (>= 17 hour-at-start))
@@ -102,19 +99,14 @@
     (add-hook 'after-make-frame-functions
 	      (lambda (frame)
 		(with-selected-frame frame
-		  (efs/set-theme)
+		  (tr/set-theme)
 		  ;; Emacs en plein écran (f11) par défaut
 		  (toggle-frame-fullscreen))))
   (toggle-frame-fullscreen)
-  (efs/set-theme))
+  (tr/set-theme))
 
-;; Package qui permet aux autres packages d'utiliser des
-;; icônes sympas
-;; ne pas oublier de faire "M-x 'all-the-icons-install-fonts'" lors de la première
-;; utilisation du package
 (use-package all-the-icons)
 
-;; Rendre cette même barre plus stylée
 (use-package doom-modeline
   :init (doom-modeline-mode t)
   :custom ((doom-modeline-height 1)))
@@ -122,21 +114,6 @@
 (display-time)
 (display-battery-mode)
 
-;; Enlever automatiquement tous les espaces en trop au bout des lignes
-(use-package ws-butler
-  :hook ((text-mode . ws-butler-mode)
-         (prog-mode . ws-butler-mode)))
-
-;; Conserver l'historique des commandes entrées dans le mini buffer
-(use-package savehist
-  :config
-  (setq history-length 25)
-  (savehist-mode 1))
-
-;; If a popup does happen, don't resize windows to be equal-sized
-(setq even-window-sizes nil)
-
-;; Key binds sympas
 (use-package expand-region
   :bind (("M-[" . er/expand-region)
          ("C-(" . er/mark-outside-pairs)))
@@ -145,9 +122,6 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; Navigation entre fichiers -------------------------------------------
-
-;; Recherche avec "C-s" améliorée
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -207,6 +181,10 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+
 ;; Org -----------------------------------------------------------------
 
 ;; Turn on indentation and auto-fill mode for Org files
@@ -244,7 +222,6 @@
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
-
 
 (use-package org
   :hook (org-mode . efs/org-mode-setup)
@@ -500,8 +477,6 @@
 
   (eshell-git-prompt-use-theme 'powerline))
 
-(global-set-key (kbd "M-C-s") 'eshell)
-
 ;; vterm
 (use-package vterm)
 (define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
@@ -510,11 +485,6 @@
 ;; Magit - package qui permet d'utiliser git plus efficacement
 
 (use-package magit)
-
-;; Arduino -------------------------------------------------------------
-
-;; (use-package platformio-mode)
-;; (use-package arduino-mode)
 
 ;; Afficher le temps de lancement --------------------------------------
 
