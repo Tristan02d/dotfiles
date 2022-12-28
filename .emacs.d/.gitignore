@@ -1,0 +1,12 @@
+# -*- mode: gitignore; -*-
+
+auto-save-list/
+.cache/
+elpa/
+eshell/
+etc/
+history
+.lsp-session-v1
+projectile-bookmarks.eld
+snippets/
+var/
