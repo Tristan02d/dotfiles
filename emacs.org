@@ -17,7 +17,7 @@ simplement et rapidement.
 
 Vous êtes libres de copier ce que vous voulez dans ma config. Pour ce faire vous pouvez soit
 aller voir les blocs qui vous intéressent dans ce fichier, soit vous pouvez directement aller
-dans [[file:./.emacs.d/init.el][init.el].
+dans [[file:./.emacs.d/init.el][init.el]].
 
 * Table des matières
 
