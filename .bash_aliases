@@ -20,7 +20,7 @@ alias sk='~/skeleton.sh'
 
 # Emacs
 
-alias emacs_c='emacs ~/.emacs.d/init.el &'
+alias emacs_c='emacs ~/.dotfiles/emacs.org &'
 alias ec='emacsclient -c'
 
 # commandes Make

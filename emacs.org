@@ -1,4 +1,4 @@
-#+title Configuration Emacs
+#+title: Configuration Emacs
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/test-init.el
 
 * Introduction
@@ -6,7 +6,7 @@
 ** Crédit
 
 La grande majorité de ma configuration d'Emacs est tirée de celle de [[https://github.com/daviwil/dotfiles/blob/9776d65c4486f2fa08ec60a06e86ecb6d2c40085/Emacs.org][David Wilson]]. Sa série
-de vidéos [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][/emacs from scratch/]] est une excellente aide pour commencer à configurer Emacs.
+de vidéos /[[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][emacs from scratch]]/ est une excellente aide pour commencer à configurer Emacs.
 
 ** Comment ça marche?
 
