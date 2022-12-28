@@ -105,6 +105,7 @@ dans [[file:./.emacs.d/init.el][init.el]].
 (global-set-key (kbd "M-C-l") 'load-theme)
 (global-set-key (kbd "M-C-v") 'eval-region)
 (global-set-key (kbd "M-C-m") 'vterm)
+(global-set-key (kbd "M-C-s") 'eshell)
 (global-set-key (kbd "M-C-g a") 'org-agenda)
 (global-set-key (kbd "M-C-g c") 'org-capture)
 
@@ -571,3 +572,174 @@ Ajoute des features d'IDE à Emacs.
 #+end_src
 
 ** Company
+
+#+begin_src emacs-lisp
+;; Complétion
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+#+end_src
+
+** Flycheck
+
+Vérification de syntaxe.
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :after lsp)
+
+#+end_src
+
+** Helm
+
+#+begin_src emacs-lisp
+(use-package helm-lsp
+  :after lsp)
+
+(use-package helm
+  :after lsp
+  :config (helm-mode))
+
+#+end_src
+
+* Configuration des langages
+
+** C/C++
+
+#+begin_src emacs-lisp
+;; C -------------------------------------------------------------------
+
+(use-package ccls
+  :after lsp
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
+
+#+end_src
+
+** Python
+
+#+begin_src emacs-lisp
+;; Python --------------------------------------------------------------
+
+(use-package lsp-python-ms
+  :after lsp
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms) (lsp))))
+
+#+end_src
+
+** LaTeX
+
+#+begin_src emacs-lisp
+;; LaTeX ---------------------------------------------------------------
+
+(use-package lsp-latex
+  :after lsp
+  :hook ((latex-mode tex-mode) .
+	 (lambda () (require 'lsp-latex) (lsp))))
+
+#+end_src
+
+** Bash
+
+#+begin_src emacs-lisp
+;; Bash ----------------------------------------------------------------
+
+(add-hook 'sh-mode-hook 'lsp)
+
+#+end_src
+
+** Java
+
+#+begin_src emacs-lisp
+;; Java ----------------------------------------------------------------
+
+(use-package lsp-java
+  :after lsp
+  :hook (java-mode .
+		   (lambda () (require 'lsp-java) (lsp))))
+
+#+end_src
+
+* Terminal
+
+** Eshell
+
+#+begin_src emacs-lisp
+;; Terminal ------------------------------------------------------------
+
+;; eshell
+(defun efs/configure-eshell ()
+  ;; Save command history when commands are entered
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  ;; Truncate buffer for performance
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  (setq eshell-history-size         10000
+        eshell-buffer-maximum-lines 10000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t))
+
+(use-package eshell-git-prompt)
+
+(use-package eshell
+  :hook (eshell-first-time-mode . efs/configure-eshell)
+  :config
+
+  (with-eval-after-load 'esh-opt
+    (setq eshell-destroy-buffer-when-process-dies t)
+    (setq eshell-visual-commands '("htop" "zsh" "vim")))
+
+  (eshell-git-prompt-use-theme 'powerline))
+
+#+end_src
+** Vterm
+
+#+begin_src emacs-lisp
+;; vterm
+(use-package vterm)
+(define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
+(define-key vterm-mode-map (kbd "C-M-j") #'counsel-switch-buffer)
+
+#+end_src
+
+* Git
+
+** Magit
+
+Là encore, beaucoup de choses à dire, heureusement que David Wilson est [[https://www.youtube.com/watch?v=INTu30BHZGk&t=1421s][là]].
+
+#+begin_src emacs-lisp
+;; Magit - package qui permet d'utiliser git plus efficacement
+
+(use-package magit)
+
+#+end_src
+
+* Afficher le temps de lancement
+
+#+begin_src emacs-lisp
+;; Afficher le temps de lancement --------------------------------------
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs lancé en  %s."
+                     (format "%.2f secondes"
+			     (float-time
+			      (time-subtract after-init-time before-init-time)))
+		     gcs-done)))
+
+#+end_src
