@@ -346,8 +346,8 @@
   (org-babel-do-load-languages
       'org-babel-load-languages
       '((emacs-lisp . t)
-	(C . t)
-	(shell . t)))
+        (C . t)
+        (shell . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
@@ -365,7 +365,10 @@
                       (expand-file-name "~/.dotfiles/emacs.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
+      (org-babel-tangle)
+      ;; Copier automatiquement la config dans le dossier emacs_config
+      (shell-command "make to_emacs_config_repo")
+      (message "Config exportée."))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
