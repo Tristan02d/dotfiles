@@ -2,6 +2,7 @@
 
 auto-save-list/
 .cache/
+eln-cache/
 elpa/
 eshell/
 etc/
