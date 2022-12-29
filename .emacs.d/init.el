@@ -370,6 +370,8 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+(use-package org-make-toc)
+
 ;; Complétion de code et autres ----------------------------------------
 
 ;; Package qui sert à créer des espèces d'alias personnalisés

@@ -3,8 +3,12 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
 * Table des matières
+:PROPERTIES:
+:TOC:      :include all :depth 2
+:END:
+:CONTENTS:
 
-#+TOC: tables
+:END:
 
 * Démarrage (un peu) plus rapide
 
@@ -531,6 +535,13 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
           (message "Config exportée."))))
 
     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+#+end_src
+
+** Org-make-toc
+
+#+begin_src emacs-lisp
+  (use-package org-make-toc)
 
 #+end_src
 
