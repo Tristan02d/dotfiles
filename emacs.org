@@ -20,6 +20,12 @@ Vous êtes libres de copier ce que vous voulez dans ma config. Pour ce faire vou
 aller voir les blocs qui vous intéressent dans ce fichier, soit vous pouvez directement aller
 dans [[file:./.emacs.d/init.el][init.el]].
 
+** Ma configuration
+
+J'utilise cette config sur un ordinateur portable et un ordinateur fixe. Les deux machines
+fonctionnent sur Ubuntu, si ce n'est pas votre cas, il y aura sûrement des modifs à faire
+dans la config.
+
 * Table des matières
 
 #+OPTIONS: toc:2
@@ -84,26 +90,29 @@ dans [[file:./.emacs.d/init.el][init.el]].
 * Raccourcis clavier
 
 #+begin_src emacs-lisp
-;; Raccourcis clavier
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  ;; Raccourcis clavier
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-(global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
-(global-set-key (kbd "M-C-w") 'other-window)
-(global-set-key (kbd "M-C-l") 'load-theme)
-(global-set-key (kbd "M-C-v") 'eval-region)
-(global-set-key (kbd "M-C-m") 'vterm)
-(global-set-key (kbd "M-C-s") 'eshell)
-(global-set-key (kbd "M-C-g a") 'org-agenda)
-(global-set-key (kbd "M-C-g c") 'org-capture)
+  (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
+  (global-set-key (kbd "M-C-w") 'other-window)
+  (global-set-key (kbd "M-C-l") 'load-theme)
+  (global-set-key (kbd "M-C-v") 'eval-region)
+  (global-set-key (kbd "M-C-m") 'vterm)
+  (global-set-key (kbd "M-C-s") 'eshell)
+  (global-set-key (kbd "M-C-g a") 'org-agenda)
+  (global-set-key (kbd "M-C-g c") 'org-capture)
 
-(global-set-key (kbd "C-p") 'kill-whole-line)
-(setq kill-whole-line t)
+  (global-set-key (kbd "C-p") 'kill-whole-line)
+  (setq kill-whole-line t)
 
-(global-set-key (kbd "C-x K") 'kill-current-buffer)
-(global-set-key (kbd "C-$") 'delete-other-windows)
+  (global-set-key (kbd "C-x K") 'kill-current-buffer)
+  (global-set-key (kbd "C-$") 'delete-other-windows)
 
-;; Mettre automatiquement les parenthèses fermantes
-(electric-pair-mode 1)
+  ;; Mettre automatiquement les parenthèses fermantes
+  (electric-pair-mode 1)
+
+  ;; Ne pas confirmer la fermeture des buffers ayant un processus
+  (setq kill-buffer-query-functions nil)
 
 #+end_src
 
@@ -727,6 +736,9 @@ Vérification de syntaxe.
 
 #+end_src
 ** Vterm
+
+Vterm nécessite notamment d'avoir sur votre machine les packages suivants /Cmake/, /libtool/
+et /gcc/.
 
 #+begin_src emacs-lisp
 ;; vterm

@@ -55,6 +55,9 @@
 ;; Mettre automatiquement les parenthèses fermantes
 (electric-pair-mode 1)
 
+;; Ne pas confirmer la fermeture des buffers ayant un processus
+(setq kill-buffer-query-functions nil)
+
 ;; Initialisation des packages
 (require 'package)
 
