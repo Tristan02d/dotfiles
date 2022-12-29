@@ -4,7 +4,7 @@
 
 * Table des matières
 
-#+TOC
+#+TOC: tables
 
 * Démarrage (un peu) plus rapide
 
