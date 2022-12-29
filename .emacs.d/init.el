@@ -110,6 +110,23 @@
 
 (use-package all-the-icons)
 
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom ((dired-listing-switches "-agho --group-directories-first")
+           (dired-kill-when-opening-new-dired-buffer t)))
+
+(use-package all-the-icons-dired
+  :after dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package dired-open
+  :after dired
+  :config
+  (setq dired-open-extensions '(("png" . "gimp")
+                                ("pdf" . "evince"))))
+
 (use-package doom-modeline
   :init (doom-modeline-mode t)
   :custom ((doom-modeline-height 1)))
@@ -152,7 +169,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-ibuffer)
          ("C-x C-f" . counsel-find-file)
-	 ("C-M-j" . counsel-switch-buffer)
+         ("C-M-j" . counsel-switch-buffer)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history)))
 
@@ -183,10 +200,6 @@
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
-
-(use-package markdown-mode
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
 
 ;; Org -----------------------------------------------------------------
 

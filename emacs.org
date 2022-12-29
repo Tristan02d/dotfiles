@@ -214,6 +214,30 @@ dans Emacs en faisant ~M-x~ puis en tapant la commande.
 
 #+end_src
 
+* Dired
+
+Naviguer entre les fichiers plus facilement.
+
+#+begin_src emacs-lisp
+    (use-package dired
+      :ensure nil
+      :commands (dired dired-jump)
+      :bind (("C-x C-j" . dired-jump))
+      :custom ((dired-listing-switches "-agho --group-directories-first")
+               (dired-kill-when-opening-new-dired-buffer t)))
+
+    (use-package all-the-icons-dired
+      :after dired
+      :hook (dired-mode . all-the-icons-dired-mode))
+
+    (use-package dired-open
+      :after dired
+      :config
+      (setq dired-open-extensions '(("png" . "gimp")
+                                    ("pdf" . "evince"))))
+
+#+end_src
+
 * Doom modeline
 
 La barre d'infos au dessus du mini buffer est pas ouf par défaut. /Doom modeline/ la rend plus
@@ -285,25 +309,25 @@ de  base comme par exemple le ~C-s~ pour chercher un mot dans un fichier.
 Idem mais pour d'autres types de fonctions.
 
 #+begin_src emacs-lisp
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x b" . counsel-ibuffer)
-         ("C-x C-f" . counsel-find-file)
-	 ("C-M-j" . counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history)))
+  (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+           ("C-x b" . counsel-ibuffer)
+           ("C-x C-f" . counsel-find-file)
+           ("C-M-j" . counsel-switch-buffer)
+           :map minibuffer-local-map
+           ("C-r" . 'counsel-minibuffer-history)))
 
-;; Meilleure description des commandes/touches
-(use-package helpful
-  :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
+  ;; Meilleure description des commandes/touches
+  (use-package helpful
+    :commands (helpful-callable helpful-variable helpful-command helpful-key)
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-key] . helpful-key))
 
 #+end_src
 
@@ -335,17 +359,6 @@ le projet en un simple raccourci clavier.
 
 *NB*: je mets personnellement mes projets dans ~\~/projets/~, si ce n'est pas votre cas,
 pensez à modifier ce paragraphe en conséquences.
-
-* Markdown
-
-/Markdown/ c'est le nom complet de l'extension /.md/.
-
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
-
-#+end_src
 
 * Org
 
