@@ -25,7 +25,8 @@
 (save-place-mode 1)   ;; Mémoriser le dernier emplacement du curseur
 
 ;; Enable line numbers for some modes
-(dolist (mode '(prog-mode-hook))
+(dolist (mode '(prog-mode-hook
+                lsp-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
 ;; Override some modes which derive from the above
