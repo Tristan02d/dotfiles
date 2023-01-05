@@ -745,6 +745,11 @@ Vérification de syntaxe.
 
 #+end_src
 
+** Assembler
+
+#+begin_src emacs-lisp
+;; (add-hook 'asm-mode-hook 'lsp)
+#+end_src
 * Terminal
 
 ** Eshell

@@ -466,6 +466,8 @@
   :hook (java-mode .
 		   (lambda () (require 'lsp-java) (lsp))))
 
+;; (add-hook 'asm-mode-hook 'lsp)
+
 ;; Terminal ------------------------------------------------------------
 
 ;; eshell
