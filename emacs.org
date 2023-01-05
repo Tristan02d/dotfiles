@@ -128,7 +128,7 @@
   (global-set-key (kbd "M-C-g a") 'org-agenda)
   (global-set-key (kbd "M-C-g c") 'org-capture)
 
-  (global-set-key (kbd "C-p") 'kill-whole-line)
+  (global-set-key (kbd "C-K") 'kill-whole-line)
   (setq kill-whole-line t)
 
   (global-set-key (kbd "C-x K") 'kill-current-buffer)
