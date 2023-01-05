@@ -7,8 +7,9 @@
 :TOC:      :include all :depth 2
 :END:
 :CONTENTS:
+- [[#table-des-matières][Table des matières]]
 - [[#démarrage-un-peu-plus-rapide][Démarrage (un peu) plus rapide]]
-- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier /.emacs.d/]]
+- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier .emacs.d]]
 - [[#interface][Interface]]
   - [[#nettoyage][Nettoyage]]
   - [[#numéros-de-lignes][Numéros de lignes]]
@@ -47,6 +48,7 @@
   - [[#latex][LaTeX]]
   - [[#bash][Bash]]
   - [[#java][Java]]
+  - [[#assembler][Assembler]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -100,10 +102,10 @@
 ** Numéros de lignes
 
 #+begin_src emacs-lisp
-  ;; Enable line numbers for some modes
-  (dolist (mode '(prog-mode-hook
-                  text-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 1))))
+;; Enable line numbers for some modes
+(dolist (mode '(prog-mode-hook
+                lsp-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
   ;; Override some modes which derive from the above
   (dolist (mode '(org-mode-hook))
@@ -697,7 +699,6 @@ Vérification de syntaxe.
 ;; C -------------------------------------------------------------------
 
 (use-package ccls
-  :after lsp
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
@@ -709,7 +710,6 @@ Vérification de syntaxe.
 ;; Python --------------------------------------------------------------
 
 (use-package lsp-python-ms
-  :after lsp
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms) (lsp))))
@@ -722,7 +722,6 @@ Vérification de syntaxe.
 ;; LaTeX ---------------------------------------------------------------
 
 (use-package lsp-latex
-  :after lsp
   :hook ((latex-mode tex-mode) .
 	 (lambda () (require 'lsp-latex) (lsp))))
 
@@ -743,12 +742,16 @@ Vérification de syntaxe.
 ;; Java ----------------------------------------------------------------
 
 (use-package lsp-java
-  :after lsp
   :hook (java-mode .
 		   (lambda () (require 'lsp-java) (lsp))))
 
 #+end_src
 
+** Assembler
+
+#+begin_src emacs-lisp
+;; (add-hook 'asm-mode-hook 'lsp)
+#+end_src
 * Terminal
 
 ** Eshell

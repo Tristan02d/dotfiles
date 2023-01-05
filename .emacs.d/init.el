@@ -26,12 +26,12 @@
 
 ;; Enable line numbers for some modes
 (dolist (mode '(prog-mode-hook
-                text-mode-hook))
+                lsp-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
-;; Override some modes which derive from the above
-(dolist (mode '(org-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  ;; Override some modes which derive from the above
+  (dolist (mode '(org-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Raccourcis clavier
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -440,14 +440,12 @@
 ;; C -------------------------------------------------------------------
 
 (use-package ccls
-  :after lsp
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
 ;; Python --------------------------------------------------------------
 
 (use-package lsp-python-ms
-  :after lsp
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms) (lsp))))
@@ -455,7 +453,6 @@
 ;; LaTeX ---------------------------------------------------------------
 
 (use-package lsp-latex
-  :after lsp
   :hook ((latex-mode tex-mode) .
 	 (lambda () (require 'lsp-latex) (lsp))))
 
@@ -466,9 +463,10 @@
 ;; Java ----------------------------------------------------------------
 
 (use-package lsp-java
-  :after lsp
   :hook (java-mode .
 		   (lambda () (require 'lsp-java) (lsp))))
+
+;; (add-hook 'asm-mode-hook 'lsp)
 
 ;; Terminal ------------------------------------------------------------
 
