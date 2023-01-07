@@ -112,7 +112,8 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
+  :bind (("C-x C-j" . dired-jump)
+         ("<tab>" . dired-open-file))
   :custom ((dired-listing-switches "-agho --group-directories-first")
            (dired-kill-when-opening-new-dired-buffer t)))
 
