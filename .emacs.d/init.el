@@ -333,13 +333,13 @@
   (org-superstar-remove-leading-stars t)
   (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun efs/org-mode-visual-fill ()
+(defun efs/visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
-  :hook (org-mode . efs/org-mode-visual-fill))
+  :hook (org-mode . efs/visual-fill))
 
 (with-eval-after-load 'org
   (org-babel-do-load-languages
@@ -372,6 +372,10 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
 (use-package org-make-toc)
+
+(use-package markdown-mode
+  :ensure nil
+  :hook (markdown-mode . efs/visual-fill))
 
 ;; Complétion de code et autres ----------------------------------------
 

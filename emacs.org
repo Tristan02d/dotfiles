@@ -541,13 +541,13 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
 ** Centrer les buffers org-mode
 
 #+begin_src emacs-lisp
-(defun efs/org-mode-visual-fill ()
+(defun efs/visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
-  :hook (org-mode . efs/org-mode-visual-fill))
+  :hook (org-mode . efs/visual-fill))
 
 #+end_src
 
@@ -591,6 +591,18 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
 #+begin_src emacs-lisp
   (use-package org-make-toc)
 
+#+end_src
+
+* Markdown
+
+Emacs permet sans ajout de package d'éditer des fichiers markdown, cette config se contente de
+centrer les buffers markdown. Souvent, les fichiers markdown finissent en /.md/.
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure nil
+    :hook (markdown-mode . efs/visual-fill))
+  
 #+end_src
 
 * Complétion de code et autres
