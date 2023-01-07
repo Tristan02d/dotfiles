@@ -245,23 +245,22 @@ dans Emacs en faisant ~M-x~ puis en tapant la commande.
 Naviguer entre les fichiers plus facilement.
 
 #+begin_src emacs-lisp
-      (use-package dired
-        :ensure nil
-        :commands (dired dired-jump)
-        :bind (("C-x C-j" . dired-jump)
-               ("<tab>" . dired-open-file))
-        :custom ((dired-listing-switches "-agho --group-directories-first")
-                 (dired-kill-when-opening-new-dired-buffer t)))
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom ((dired-listing-switches "-agho --group-directories-first")
+             (dired-kill-when-opening-new-dired-buffer t)))
 
-      (use-package all-the-icons-dired
-        :after dired
-        :hook (dired-mode . all-the-icons-dired-mode))
+  (use-package all-the-icons-dired
+    :after dired
+    :hook (dired-mode . all-the-icons-dired-mode))
 
-      (use-package dired-open
-        :after dired
-        :config
-        (setq dired-open-extensions '(("png" . "gimp")
-                                      ("pdf" . "evince"))))
+  (use-package dired-open
+    :after dired
+    :config
+    (setq dired-open-extensions '(("png" . "gimp")
+                                  ("pdf" . "evince"))))
 
 #+end_src
 
