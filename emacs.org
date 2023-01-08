@@ -36,6 +36,7 @@
   - [[#centrer-les-buffers-org-mode][Centrer les buffers org-mode]]
   - [[#org-babel][Org babel]]
   - [[#org-make-toc][Org-make-toc]]
+- [[#markdown][Markdown]]
 - [[#complétion-de-code-et-autres][Complétion de code et autres]]
   - [[#yasnippet][Yasnippet]]
   - [[#lsp][Lsp]]
@@ -630,7 +631,7 @@ Permet de créer des raccourcis personnalisés. Par exemple, pour écrire une si
 
 ** Lsp
 
-Ajoute des features d'IDE à Emacs.
+Ajoute des fonctionnalités d'IDE à Emacs.
 
 #+begin_src emacs-lisp
 ;; Lsp
@@ -705,6 +706,10 @@ Vérification de syntaxe.
 
 * Configuration des langages
 
+Le package /lsp-mode/ installé plus haut dans la section [[#lsp][Lsp]] s'applique sur [[https://emacs-lsp.github.io/lsp-mode/page/languages/][différents langages]].
+Certains, comme le C, ne requièrent pas de configuration externe à Emacs. D'autres, comme LaTeX,
+requièrent quelques manipulations afin de pouvoir être supportés.
+
 ** C/C++
 
 #+begin_src emacs-lisp
@@ -730,6 +735,13 @@ Vérification de syntaxe.
 
 ** LaTeX
 
+Pour que /lsp-mode/ supporte LaTeX, il y a plusieurs méthodes. Pour ma part j'ai télécharger [[https://github.com/latex-lsp/texlab/releases][ici]] le fichier qui convient à mon système. Je l'ai ensuite décompressé et déplacé dans un dossier faisant
+partie du /exec-path/. Le /exec-path/ est une liste de dossiers dans lesquels Emacs va chercher des
+choses dont il a besoin, c'est le cousin du /PATH/ en Bash. Pour connaître cette liste il faut ouvrir
+Emacs et faire ~M-x~ puis taper ~describe-variable~, faire entrée et taper ~exec-path~ puis faire
+à nouveau entrée. Un nouveau buffer va s'ouvrir avec en haut une liste de répertoires. Ajoutez le
+fichier que vous avez décompressé a l'un de ces répertoires. Plus d'infos [[https://github.com/latex-lsp/texlab][ici]].
+
 #+begin_src emacs-lisp
 ;; LaTeX ---------------------------------------------------------------
 
@@ -740,6 +752,11 @@ Vérification de syntaxe.
 #+end_src
 
 ** Bash
+
+Pour que /lsp-mode/ supporte Bash, il suffit d'installer le package /npm/ (je rappelle que je suis sur Ubuntu), puis d'ouvrir un script Bash dans Emacs. Lorsque /lsp-mode/ essaiera de se lancer, il vous
+demandera si il peut installer /bash-ls/ automatiquement, dites-lui oui et ce sera bon. Pour que /lsp-mode/ se lance, il faut soit avoir la config qui suit dans son /init.el/ auquel cas il se lancera
+automatiquement à l'ouverture d'un script Bash, soit le lancer à la main, dans le
+buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 #+begin_src emacs-lisp
 ;; Bash ----------------------------------------------------------------
@@ -762,7 +779,8 @@ Vérification de syntaxe.
 ** Assembler
 
 #+begin_src emacs-lisp
-;; (add-hook 'asm-mode-hook 'lsp)
+  ;; (add-hook 'asm-mode-hook 'lsp)
+
 #+end_src
 * Terminal
 
