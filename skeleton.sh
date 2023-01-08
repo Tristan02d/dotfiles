@@ -66,9 +66,6 @@ echo "%%
 \end{document}" > $file_fullname
 }
 
-# demande des auteurs
-
-
 #Vérification des arguments
 if [ $# -ne 1 ]
 then
@@ -125,6 +122,3 @@ if [ "$extension" = 'sh' ]
 then
 squelette_sh
 fi
-
-# Ouverture du nouveau fichier
-# emacs $filename &
