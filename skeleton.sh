@@ -104,6 +104,7 @@ do
 $new_author"
     read new_author
 done
+
 echo "Liste des auteurs:
 $authors"
 
