@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: figure
+# key: f
+# --
+\begin{figure}[ht]
+
+$1
+
+\caption{$0}
+\label{$0}
+\end{figure}
+

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: tabular
+# key: tab
+# --
+\begin{tabular}[$0]
+\label{$0}
+
+$1
+
+\end{figure}
+
+
