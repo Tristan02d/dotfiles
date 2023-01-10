@@ -614,18 +614,19 @@ Permet de créer des raccourcis personnalisés. Par exemple, pour écrire une si
 /main/ en C, il n'y a qu'à écrire ~main~ et faire ~TAB~.
 
 #+begin_src emacs-lisp
-;; Complétion de code et autres ----------------------------------------
+  ;; Complétion de code et autres ----------------------------------------
 
-;; Package qui sert à créer des espèces d'alias personnalisés
-;; pour programmer plus vite
-(use-package yasnippet
-  :hook (lsp-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
+  ;; Package qui sert à créer des espèces d'alias personnalisés
+  ;; pour programmer plus vite
+  (use-package yasnippet
+    :hook (lsp-mode . yas-minor-mode)
+    :config
+    (yas-load-directory "~/.dotfiles/.emacs.d/custom-snippets/")
+    (yas-reload-all))
 
-(global-set-key (kbd "C-<tab>") 'yas-expand)
+  (global-set-key (kbd "C-<tab>") 'yas-expand)
 
-(use-package yasnippet-snippets)
+  (use-package yasnippet-snippets)
 
 #+end_src
 

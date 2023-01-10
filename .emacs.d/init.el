@@ -384,6 +384,7 @@
 (use-package yasnippet
   :hook (lsp-mode . yas-minor-mode)
   :config
+  (yas-load-directory "~/.dotfiles/.emacs.d/custom-snippets/")
   (yas-reload-all))
 
 (global-set-key (kbd "C-<tab>") 'yas-expand)
