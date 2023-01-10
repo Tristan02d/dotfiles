@@ -3,10 +3,9 @@
 # key: tab
 # --
 \begin{tabular}[$0]
-\label{$0}
-
-$1
-
+  \label{$1}
+  \hline
+  $2
+  \hline
 \end{figure}
-
 

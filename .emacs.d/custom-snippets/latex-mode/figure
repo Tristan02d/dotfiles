@@ -3,10 +3,9 @@
 # key: f
 # --
 \begin{figure}[ht]
-
-$1
-
-\caption{$0}
-\label{$0}
+  \centering
+  $2
+  \caption{$0}
+  \label{fig:$1}
 \end{figure}
 
