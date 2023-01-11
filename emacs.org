@@ -26,6 +26,7 @@
 - [[#doom-modeline][Doom modeline]]
 - [[#expand-region][Expand region]]
 - [[#rainbow-delimiters][Rainbow delimiters]]
+- [[#beacon][Beacon]]
 - [[#ivy][Ivy]]
 - [[#counsel-et-helpful][Counsel et helpful]]
 - [[#projectile][Projectile]]
@@ -55,6 +56,7 @@
   - [[#vterm][Vterm]]
 - [[#git][Git]]
   - [[#magit][Magit]]
+  - [[#magit-todos][Magit-todos]]
 - [[#afficher-le-temps-de-lancement][Afficher le temps de lancement]]
 :END:
 
