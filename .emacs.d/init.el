@@ -33,30 +33,6 @@
   (dolist (mode '(org-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Raccourcis clavier
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-(global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
-(global-set-key (kbd "M-C-w") 'other-window)
-(global-set-key (kbd "M-C-l") 'load-theme)
-(global-set-key (kbd "M-C-v") 'eval-region)
-(global-set-key (kbd "M-C-m") 'vterm)
-(global-set-key (kbd "M-C-s") 'eshell)
-(global-set-key (kbd "M-C-g a") 'org-agenda)
-(global-set-key (kbd "M-C-g c") 'org-capture)
-
-(global-set-key (kbd "C-K") 'kill-whole-line)
-(setq kill-whole-line t)
-
-(global-set-key (kbd "C-x K") 'kill-current-buffer)
-(global-set-key (kbd "C-$") 'delete-other-windows)
-
-;; Mettre automatiquement les parenthèses fermantes
-(electric-pair-mode 1)
-
-;; Ne pas confirmer la fermeture des buffers ayant un processus
-(setq kill-buffer-query-functions nil)
-
 ;; Initialisation des packages
 (require 'package)
 
@@ -70,6 +46,32 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+;; Raccourcis clavier
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+(global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
+(global-set-key (kbd "M-C-l") 'load-theme)
+(global-set-key (kbd "M-C-v") 'eval-region)
+(global-set-key (kbd "M-C-m") 'vterm)
+(global-set-key (kbd "M-C-s") 'eshell)
+(global-set-key (kbd "M-C-g a") 'org-agenda)
+(global-set-key (kbd "M-C-g c") 'org-capture)
+(global-set-key (kbd "C-x K") 'kill-current-buffer)
+(global-set-key (kbd "C-$") 'delete-other-windows)
+
+;; Mettre automatiquement les parenthèses fermantes
+(electric-pair-mode 1)
+
+;; Ne pas confirmer la fermeture des buffers ayant un processus
+(setq kill-buffer-query-functions nil)
+
+(use-package bind-key
+  :init
+  (bind-key "C-i" 'previous-line)
+  (bind-key "C-k" 'next-line)
+  (bind-key "C-j" 'backward-char)
+  (bind-key "C-l" 'forward-char))
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering)

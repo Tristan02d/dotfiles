@@ -116,35 +116,6 @@
 
 #+end_src
 
-* Raccourcis clavier
-
-#+begin_src emacs-lisp
-  ;; Raccourcis clavier
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-  (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
-  (global-set-key (kbd "M-C-w") 'other-window)
-  (global-set-key (kbd "M-C-l") 'load-theme)
-  (global-set-key (kbd "M-C-v") 'eval-region)
-  (global-set-key (kbd "M-C-m") 'vterm)
-  (global-set-key (kbd "M-C-s") 'eshell)
-  (global-set-key (kbd "M-C-g a") 'org-agenda)
-  (global-set-key (kbd "M-C-g c") 'org-capture)
-
-  (global-set-key (kbd "C-K") 'kill-whole-line)
-  (setq kill-whole-line t)
-
-  (global-set-key (kbd "C-x K") 'kill-current-buffer)
-  (global-set-key (kbd "C-$") 'delete-other-windows)
-
-  ;; Mettre automatiquement les parenthèses fermantes
-  (electric-pair-mode 1)
-
-  ;; Ne pas confirmer la fermeture des buffers ayant un processus
-  (setq kill-buffer-query-functions nil)
-
-#+end_src
-
 * Réglages pour les packages
 
 Tout comme la majorité des distributions Linux, Emacs utilise des dépôts dans lesquels se trouve
@@ -168,6 +139,37 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+#+end_src
+
+* Raccourcis clavier
+
+#+begin_src emacs-lisp
+  ;; Raccourcis clavier
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+  (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
+  (global-set-key (kbd "M-C-l") 'load-theme)
+  (global-set-key (kbd "M-C-v") 'eval-region)
+  (global-set-key (kbd "M-C-m") 'vterm)
+  (global-set-key (kbd "M-C-s") 'eshell)
+  (global-set-key (kbd "M-C-g a") 'org-agenda)
+  (global-set-key (kbd "M-C-g c") 'org-capture)
+  (global-set-key (kbd "C-x K") 'kill-current-buffer)
+  (global-set-key (kbd "C-$") 'delete-other-windows)
+
+  ;; Mettre automatiquement les parenthèses fermantes
+  (electric-pair-mode 1)
+
+  ;; Ne pas confirmer la fermeture des buffers ayant un processus
+  (setq kill-buffer-query-functions nil)
+
+  (use-package bind-key
+    :init
+    (bind-key "C-i" 'previous-line)
+    (bind-key "C-k" 'next-line)
+    (bind-key "C-j" 'backward-char)
+    (bind-key "C-l" 'forward-char))
 
 #+end_src
 
