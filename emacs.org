@@ -300,6 +300,14 @@ Colore les parenthèses en arc-en-ciel pour reconnaître les paires.
 
 #+end_src
 
+* Beacon
+
+#+begin_src emacs-lisp
+  (use-package beacon
+    :init
+    (beacon-mode 1))
+#+end_src
+
 * Ivy
 
 /Ivy/ est l'un des packages les plus utilisés dans Emacs, il améliore énormément les fonctions
@@ -840,6 +848,13 @@ Là encore, beaucoup de choses à dire, heureusement que David Wilson est [[http
 
 (use-package magit)
 
+#+end_src
+
+** Magit-todos
+
+#+begin_src emacs-lisp
+  (use-package magit-todos)
+  
 #+end_src
 
 * Afficher le temps de lancement

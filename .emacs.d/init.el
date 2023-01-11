@@ -141,6 +141,10 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package beacon
+  :init
+  (beacon-mode 1))
+
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -508,6 +512,8 @@
 ;; Magit - package qui permet d'utiliser git plus efficacement
 
 (use-package magit)
+
+(use-package magit-todos)
 
 ;; Afficher le temps de lancement --------------------------------------
 
