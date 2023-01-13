@@ -331,13 +331,14 @@ La barre d'infos au dessus du mini buffer est pas ouf par défaut. /Doom modelin
 belle et plus utile.
 
 #+begin_src emacs-lisp
-(use-package diminish)
+  (use-package diminish)
 
-(use-package doom-modeline
-:custom
-(display-time)
-(display-battery-mode t)
-(doom-modeline-height 1))
+  (use-package doom-modeline
+  :custom
+  (display-time)
+  (display-battery-mode 1)
+  (doom-modeline-height 1)
+  (doom-modeline-mode 1))
 
 #+end_src
 
