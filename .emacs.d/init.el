@@ -142,6 +142,9 @@
 (use-package monokai-pro-theme)
 (use-package solo-jazz-theme)
 
+(advice-add 'rainbow-turn-on :after  #'solo-jazz-theme-rainbow-turn-on)
+(advice-add 'rainbow-turn-off :after #'solo-jazz-theme-rainbow-turn-off)
+
 ;; Récupérer l'heure qu'il est au lancement pour charger un theme en conséquence
 (defun tr/set-theme ()
   (setq hour-at-start (decoded-time-hour (decode-time)))

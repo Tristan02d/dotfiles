@@ -254,10 +254,12 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 ** Installation des themes
 
 #+begin_src emacs-lisp
-;; Themes
-(use-package monokai-pro-theme)
-(use-package solo-jazz-theme)
+  ;; Themes
+  (use-package monokai-pro-theme)
+  (use-package solo-jazz-theme)
 
+  (advice-add 'rainbow-turn-on :after  #'solo-jazz-theme-rainbow-turn-on)
+  (advice-add 'rainbow-turn-off :after #'solo-jazz-theme-rainbow-turn-off)
 #+end_src
 
 ** Charger le theme en fonction de l'heure de la journée
