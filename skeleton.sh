@@ -48,28 +48,31 @@ echo "%%
 \usepackage{amsmath, amssymb}
 \newtheorem{defi}{Définition}
 
-% Algortihmes
-\usepackage[vlined,lined,linesnumbered,boxed,french]{algorithm2e}
-\DeclareMathOperator*{\argmin}{argmin}
-\DeclareMathOperator{\myfunc}{myfunc}
-\DeclareMathOperator*{\sign}{sign}
-\DeclareMathOperator*{\imwh}{width}
-\DeclareMathOperator*{\imht}{height}
-
-% Extra
-\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
-\usepackage{url}
+\author{Tristan Riehs}
+\title{}
 
 \begin{document}
-
+\maketitle
 
 \end{document}" > $file_fullname
+}
+
+prompt_images_dir(){
+    echo "Voulez vous créer le dossier $file_dirname/images ? [o/N]"
+    read answer
+    if [ "$answer" = "o" ] || [ "$answer" = "O" ]
+    then
+	mkdir $file_dirname/images
+    elif [ "$answer" ] && [ "$answer" != "n" ] && [ "$answer" != "N" ]
+    then
+	prompt_images_dir
+    fi
 }
 
 #Vérification des arguments
 if [ $# -ne 1 ]
 then
-    echo "Il faut le nom du fichier à créer avec la bonne extension en paramètre:
+    echo "Il faut spécifier le nom du fichier à créer avec la bonne extension en paramètre:
 script bash    -> .sh
 programme C    -> .c
 header C       -> .h
@@ -85,8 +88,9 @@ chmod u+wrx $file_fullname
 
 echo $file_fullname > $file_fullname
 
-extension=$(rev $file_fullname |cut -f1 -d'.' | rev)
+extension=$(rev $file_fullname | cut -f1 -d'.' | rev)
 filename=$(rev $file_fullname | cut -f1 -d'/' | rev)
+file_dirname=$(dirname $file_fullname)
 
 # Récupération des noms des auteurs
 authors="Tristan Riehs e"
@@ -111,15 +115,16 @@ $authors"
 # Attribution du bon squelette
 if [ "$extension" = 'c' ] || [ "$extension" = 'h' ]
 then
-squelette_C
+    squelette_C
 fi
 
 if [ "$extension" = 'tex' ]
 then
-squelette_tex
+    squelette_tex
+    prompt_images_dir
 fi
 
 if [ "$extension" = 'sh' ]
 then
-squelette_sh
+    squelette_sh
 fi
