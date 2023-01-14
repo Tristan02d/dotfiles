@@ -69,19 +69,35 @@ prompt_images_dir(){
     fi
 }
 
-#Vérification des arguments
-if [ $# -ne 1 ]
-then
+reprompt(){
     echo "Il faut spécifier le nom du fichier à créer avec la bonne extension en paramètre:
 script bash    -> .sh
 programme C    -> .c
 header C       -> .h
-document LaTeX -> .tex"
-    exit
+document LaTeX -> .tex
+pour un Makefile, écrire directement \"Makefile\"."
+    read filename
+    file_fullname=$PWD+$filename
+}
+
+#Vérification des arguments
+
+if [ $# -ne 1 ]
+then
+    reprompt
+else
+    file_fullname=$1
 fi
 
+# vérification du nom de fichier donné
+
+if [ "$filename" = "Makefile" ]
+then
+    echo "Quel type de Makefile voulez-vous créer"
+else
+    
+
 # Début du code principal
-file_fullname=$1
 
 touch $file_fullname
 chmod u+wrx $file_fullname
@@ -89,8 +105,8 @@ chmod u+wrx $file_fullname
 echo $file_fullname > $file_fullname
 
 extension=$(rev $file_fullname | cut -f1 -d'.' | rev)
-filename=$(rev $file_fullname | cut -f1 -d'/' | rev)
 file_dirname=$(dirname $file_fullname)
+filename=$(rev $file_fullname | cut -f1 -d'/' | rev)
 
 # Récupération des noms des auteurs
 authors="Tristan Riehs e"
@@ -116,15 +132,15 @@ $authors"
 if [ "$extension" = 'c' ] || [ "$extension" = 'h' ]
 then
     squelette_C
-fi
-
-if [ "$extension" = 'tex' ]
+elif [ "$extension" = 'tex' ]
 then
     squelette_tex
     prompt_images_dir
-fi
-
-if [ "$extension" = 'sh' ]
+elif [ "$extension" = 'sh' ]
 then
     squelette_sh
+else
+    rm -f $file_fullname
+    echo "Extension inconnue."
+    exit
 fi
