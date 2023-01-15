@@ -53,8 +53,6 @@
   (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
   (global-set-key (kbd "M-C-l") 'load-theme)
   (global-set-key (kbd "M-C-v") 'eval-region)
-  (global-set-key (kbd "M-C-m") 'vterm)
-  (global-set-key (kbd "M-C-s") 'eshell)
   (global-set-key (kbd "M-C-g a") 'org-agenda)
   (global-set-key (kbd "M-C-g c") 'org-capture)
   (global-set-key (kbd "C-x K") 'kill-current-buffer)
