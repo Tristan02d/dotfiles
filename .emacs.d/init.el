@@ -190,7 +190,7 @@
 
 (use-package doom-modeline
 :custom
-(display-time)
+(display-time-mode 1)
 (display-battery-mode 1)
 (doom-modeline-height 1)
 (doom-modeline-mode 1))
