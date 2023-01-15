@@ -9,12 +9,13 @@
 :CONTENTS:
 - [[#table-des-matières][Table des matières]]
 - [[#démarrage-un-peu-plus-rapide][Démarrage (un peu) plus rapide]]
+- [[#démarrage-beaucoup-plus-rapide][Démarrage (beaucoup) plus rapide]]
 - [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier .emacs.d]]
 - [[#interface][Interface]]
   - [[#nettoyage][Nettoyage]]
   - [[#numéros-de-lignes][Numéros de lignes]]
-- [[#raccourcis-clavier][Raccourcis clavier]]
 - [[#réglages-pour-les-packages][Réglages pour les packages]]
+- [[#raccourcis-clavier][Raccourcis clavier]]
 - [[#no-littering][No littering]]
 - [[#which-key][Which-key]]
 - [[#theme][Theme]]
@@ -72,6 +73,15 @@
 (setq native-comp-async-report-warnings-errors nil)
 
 #+end_src
+
+* Démarrage (beaucoup) plus rapide
+
+Pour pouvoir lancer Emacs beaucoup plus rapidements (en environ 0.2s au lieu de  2), on peut
+le lancer en arrière plan. Le process en arrière plan est lancé par le script [[./startup.sh][startup.sh]]. Cela permet de
+charger la configuration une unique fois au démarrage du PC au lieu de la charger à chaque ouverture
+d'Emacs. Ensuite, pour utiliser ce processus en arrière plan, il faut lancer Emacs en mode client avec
+la commande ~emacsclient -c~ au lieu de simplement ~emacs~. J'ai personnellement fait un alias
+~emacs='emacsclient -c'~.
 
 * Nettoyage du dossier /.emacs.d/
 
@@ -281,15 +291,15 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 ** Chargement du theme et fenêtre en plein écran
 
 #+begin_src emacs-lisp
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-	      (lambda (frame)
-		(with-selected-frame frame
-		  (tr/set-theme)
-		  ;; Emacs en plein écran (f11) par défaut
-		  (toggle-frame-fullscreen))))
-  (toggle-frame-fullscreen)
-  (tr/set-theme))
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (tr/set-theme)
+                    (setq doom-modeline-icon t)
+                    (toggle-frame-fullscreen))))
+    (toggle-frame-fullscreen)
+    (tr/set-theme))
 #+end_src
 
 * All the icons
@@ -650,10 +660,7 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
                           (expand-file-name "~/.dotfiles/emacs.org"))
         ;; Dynamic scoping to the rescue
         (let ((org-confirm-babel-evaluate nil))
-          (org-babel-tangle)
-          ;; Copier automatiquement la config dans le dossier emacs_config
-          (shell-command "make to_emacs_config_repo")
-          (message "Config exportée."))))
+          (org-babel-tangle))))
 
     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 

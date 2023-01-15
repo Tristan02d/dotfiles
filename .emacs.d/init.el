@@ -158,12 +158,12 @@
   )
 
 (if (daemonp)
-    (add-hook 'after-make-frame-functions
-	      (lambda (frame)
-		(with-selected-frame frame
-		  (tr/set-theme)
-		  ;; Emacs en plein écran (f11) par défaut
-		  (toggle-frame-fullscreen))))
+    (add-hook 'server-after-make-frame-hook
+              (lambda (frame)
+                (with-selected-frame frame
+                  (tr/set-theme)
+                  (setq doom-modeline-icon t)
+                  (toggle-frame-fullscreen))))
   (toggle-frame-fullscreen)
   (tr/set-theme))
 
@@ -430,10 +430,7 @@
                       (expand-file-name "~/.dotfiles/emacs.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle)
-      ;; Copier automatiquement la config dans le dossier emacs_config
-      (shell-command "make to_emacs_config_repo")
-      (message "Config exportée."))))
+      (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
