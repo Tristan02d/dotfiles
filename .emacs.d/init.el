@@ -158,7 +158,7 @@
   )
 
 (if (daemonp)
-    (add-hook 'server-after-make-frame-hook
+    (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (with-selected-frame frame
                   (tr/set-theme)
