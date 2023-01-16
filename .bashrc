@@ -119,6 +119,7 @@ if ! shopt -oq posix; then
 fi
 
 # Powerline
+# uniquement si le terminal est ouvert en dehors d'Emacs
 
 if [[ "$INSIDE_EMACS" != 'vterm' ]]; then
 
