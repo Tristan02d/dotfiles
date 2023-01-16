@@ -12,7 +12,7 @@ alias gf='git fetch'
 alias gc='git commit -m'
 alias gpll='git pull'
 alias gd='git diff'
-alias grm='git rm'
+alias gr='git rm'
 
 # skeleton
 
@@ -20,14 +20,4 @@ alias sk='~/skeleton.sh'
 
 # Emacs
 
-alias emacs_c='emacs ~/.dotfiles/emacs.org &'
-alias ec='emacsclient -c'
-
-# commandes Make
-
-alias run='make run'
-alias clean='make clean'
-
-# japonais
-
-alias genki='evince ~/enseirb/japonais/Genki1.pdf &'
+alias emacs_c='emacsclient -c -a ~/.dotfiles/emacs.org &'
