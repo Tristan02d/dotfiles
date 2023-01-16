@@ -51,7 +51,6 @@
   - [[#latex][LaTeX]]
   - [[#bash][Bash]]
   - [[#java][Java]]
-  - [[#assembler][Assembler]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -59,6 +58,8 @@
   - [[#magit][Magit]]
   - [[#magit-todos][Magit-todos]]
 - [[#afficher-le-temps-de-lancement][Afficher le temps de lancement]]
+  - [[#mode-gui][Mode GUI]]
+  - [[#mode-client][Mode client]]
 :END:
 
 * Démarrage (un peu) plus rapide
@@ -76,12 +77,13 @@
 
 * Démarrage (beaucoup) plus rapide
 
-Pour pouvoir lancer Emacs beaucoup plus rapidements (en environ 0.2s au lieu de  2), on peut
-le lancer en arrière plan. Le process en arrière plan est lancé par le script [[./startup.sh][startup.sh]]. Cela permet de
-charger la configuration une unique fois au démarrage du PC au lieu de la charger à chaque ouverture
-d'Emacs. Ensuite, pour utiliser ce processus en arrière plan, il faut lancer Emacs en mode client avec
-la commande ~emacsclient -c~ au lieu de simplement ~emacs~. J'ai personnellement fait un alias
-~emacs='emacsclient -c'~.
+Pour pouvoir lancer Emacs beaucoup plus rapidements (en environ 0.2s au lieu de  2 à 3s), on peut
+le lancer en arrière plan. Le process en arrière plan est lancé grâce à la commande ~emacs --daemon~
+du script [[./startup.sh][startup.sh]]. Cela permet de charger la configuration une unique fois au démarrage du PC au
+lieu de la charger à chaque ouverture d'Emacs. Il y a toutefois une subtilité: si après avoir lancé le
+processus en arrière-plan, vous relancer Emacs en mode GUI, par exemple avec la commande ~emacs~,
+vous n'utiliserez pas la config chargée par le processus en arrière plan. Pour pouvoir ouvrir Emacs et se
+"rattacher" à ce processus, il faut le lancer en mode client avec la commande ~emacsclient -c~.
 
 * Nettoyage du dossier /.emacs.d/
 
@@ -115,22 +117,22 @@ la commande ~emacsclient -c~ au lieu de simplement ~emacs~. J'ai personnellement
 ** Numéros de lignes
 
 #+begin_src emacs-lisp
-;; Enable line numbers for some modes
-(dolist (mode '(prog-mode-hook
-                lsp-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+  ;; Enable line numbers for some modes
+  (dolist (mode '(prog-mode-hook
+                  lsp-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
   ;; Override some modes which derive from the above
   (dolist (mode '(org-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+  (column-number-mode 1)
 #+end_src
 
 * Réglages pour les packages
 
-Tout comme la majorité des distributions Linux, Emacs utilise des dépôts dans lesquels se trouve
-des packages que nous pouvons installer pour ajouter des fonctionnalités. La plupart sont, à
-l'instar d'Emacs, open source.
+Tout comme la majorité des distributions Linux, Emacs utilise des dépôts dans lesquels se trouvent
+des packages que nous pouvons installer pour ajouter des fonctionnalités.
 
 Les trois dépôts suivants contiennent 99% des packages que vous serez amenés à utiliser. Le
 dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org/.
@@ -464,7 +466,7 @@ le projet en un simple raccourci clavier.
 
 #+end_src
 
-*NB*: je mets personnellement mes projets dans ~\~/projets/~, si ce n'est pas votre cas,
+*NB*: je mets personnellement mes projets dans ~~/projets/~, si ce n'est pas votre cas,
 pensez à modifier ce paragraphe en conséquences.
 
 * Org
@@ -801,6 +803,8 @@ requièrent quelques manipulations afin de pouvoir être supportés.
 
 ** Python
 
+*Section encore en travaux.*
+
 #+begin_src emacs-lisp
 ;; Python --------------------------------------------------------------
 
@@ -845,6 +849,8 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 ** Java
 
+*Section encore en travaux.*
+
 #+begin_src emacs-lisp
 ;; Java ----------------------------------------------------------------
 
@@ -854,12 +860,6 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 #+end_src
 
-** Assembler
-
-#+begin_src emacs-lisp
-  ;; (add-hook 'asm-mode-hook 'lsp)
-
-#+end_src
 * Terminal
 
 ** Eshell
@@ -896,7 +896,10 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 ** Vterm
 
 Vterm nécessite notamment d'avoir sur votre machine les packages suivants /Cmake/, /libtool/
-et /gcc/.
+et /gcc/. Plus d'infos [[https://github.com/akermu/emacs-libvterm][ici]]. De plus, ayant installé [[https://www.youtube.com/watch?v=zfm2E4E7Dok&t=966s][powerline]] dans mon terminal, j'ai du adapté mon [[./.bashrc][bashrc]] parce que powerline est moche dans vterm. Qui plus est, dans Emacs j'utilise Git via
+/Magit/ donc powerline n'est pas utile. Par rapport à /eshell/, /vterm/ a deux avantages majeurs: il
+est plus performant et charge automatiquement le /bashrc/. Ainsi vous pouvez notamment
+directement utiliser vos [[./.bash_aliases][alias]].
 
 #+begin_src emacs-lisp
 ;; vterm
@@ -908,9 +911,9 @@ et /gcc/.
 
 * Git
 
-** Magit
-
 Là encore, beaucoup de choses à dire, heureusement que David Wilson est [[https://www.youtube.com/watch?v=INTu30BHZGk&t=1421s][là]].
+
+** Magit
 
 #+begin_src emacs-lisp
 ;; Magit - package qui permet d'utiliser git plus efficacement
@@ -928,6 +931,10 @@ Là encore, beaucoup de choses à dire, heureusement que David Wilson est [[http
 
 * Afficher le temps de lancement
 
+Petit truc plutôt cool qui affiche le temps de lancement dans le mini buffer.
+
+** Mode GUI
+
 #+begin_src emacs-lisp
 ;; Afficher le temps de lancement --------------------------------------
 
@@ -938,5 +945,14 @@ Là encore, beaucoup de choses à dire, heureusement que David Wilson est [[http
 			     (float-time
 			      (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
+
+#+end_src
+
+*Attention:* sur mon PC portable j'ai un mode économie d'énergie qui a le facheux défaut de ralentir
+considérablement le temps de lancement d'Emacs en mode GUI. Le temps de lancement passe de 2s à plus de 5s.
+
+** Mode client
+
+#+begin_src emacs-lisp
 
 #+end_src

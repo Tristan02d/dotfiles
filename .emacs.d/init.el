@@ -29,9 +29,11 @@
                 lsp-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
-  ;; Override some modes which derive from the above
-  (dolist (mode '(org-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+;; Override some modes which derive from the above
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(column-number-mode 1)
 
 ;; Initialisation des packages
 (require 'package)
@@ -532,8 +534,6 @@
   :hook (java-mode .
 		   (lambda () (require 'lsp-java) (lsp))))
 
-;; (add-hook 'asm-mode-hook 'lsp)
-
 ;; Terminal ------------------------------------------------------------
 
 ;; eshell
@@ -581,3 +581,5 @@
 			     (float-time
 			      (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
+
+
