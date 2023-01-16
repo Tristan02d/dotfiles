@@ -4,7 +4,7 @@
 * Abstract
 
 This repository is primarly meant to, after allowing me to synchronize my configuration across machines I use, to introduce Emacs to new students from [[https://enseirb-matmeca.bordeaux-inp.fr][ENSEIRB-MATMECA]]: the engineering school
-where I studied and that is located in Bordeaux, France. Hence, everything is written in French.
+where I study and that is located in Bordeaux, France. Hence, everything is written in French.
 
 * Crédit
 
