@@ -1,25 +1,27 @@
 #+title: Configuration Emacs
 #+author: Tristan Riehs
 
+* Abstract
+
+This repository is primarly meant to, after allowing me to synchronize my configuration across machines I use, to introduce Emacs to new students from [[https://enseirb-matmeca.bordeaux-inp.fr][ENSEIRB-MATMECA]]: the engineering school
+where I studied and that is located in Bordeaux, France. Hence, everything is written in French.
+
 * Crédit
 
 La grande majorité de ma configuration d'Emacs est tirée de celle de [[https://github.com/daviwil/dotfiles/blob/9776d65c4486f2fa08ec60a06e86ecb6d2c40085/Emacs.org][David Wilson]]. Sa série
 de vidéos /[[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][emacs from scratch]]/ est une excellente ressource pour apprendre à configurer Emacs.
 
-* Comment ça marche?
+* Comment ça marche ?
 
-J'écris ma config dans le fichier ~emacs.org~ qui contient 
-des blocs de code qui sont automatiquement
-écrits les uns à la suite des autres dans le fichier ~init.el~ qui est le fichier dans lequel Emacs va
-chercher la config. Cela me permet d'y voir clair dans le fichier de config pour le modifier plus
-simplement et rapidement.
+J'écris ma config dans le fichier [[emacs.org][emacs.org]] qui contient des blocs de code qui sont automatiquement
+écrits les uns à la suite des autres dans le fichier [[./.emacs.d/init.el][init.el]] qui est le fichier dans lequel
+Emacs va chercher la config pour la charger. Cela me permet d'y voir clair dans le fichier de config pour
+le modifier plus rapidement et simplement.
 
-Vous êtes libres de copier ce que vous voulez dans ma config. Pour ce faire vous pouvez soit
-aller voir les blocs qui vous intéressent dans [[./emacs.org][ce fichier]], soit vous pouvez directement aller
-dans [[./.emacs.d/init.el][init.el]].
+Vous êtes libres de copier ce que vous voulez dans ma config. 
 
 * Ma configuration
 
 J'utilise cette config sur un ordinateur portable et un ordinateur fixe. Les deux machines
-fonctionnent sur Ubuntu, si ce n'est pas votre cas, il y aura des modifications à faire
-dans la config.
+fonctionnent sur Ubuntu, si ce n'est pas votre cas, il y aura sûrement des modifications à faire
+dans la config, en particulier si vous n'utilisez pas Linux.
