@@ -59,7 +59,6 @@
   - [[#magit-todos][Magit-todos]]
 - [[#afficher-le-temps-de-lancement][Afficher le temps de lancement]]
   - [[#mode-gui][Mode GUI]]
-  - [[#mode-client][Mode client]]
 :END:
 
 * Démarrage (un peu) plus rapide
@@ -84,6 +83,10 @@ lieu de la charger à chaque ouverture d'Emacs. Il y a toutefois une subtilité:
 processus en arrière-plan, vous relancer Emacs en mode GUI, par exemple avec la commande ~emacs~,
 vous n'utiliserez pas la config chargée par le processus en arrière plan. Pour pouvoir ouvrir Emacs et se
 "rattacher" à ce processus, il faut le lancer en mode client avec la commande ~emacsclient -c~.
+
+#+begin_src emacs-lisp
+  (setq server-client-instructions nil)
+#+end_src
 
 * Nettoyage du dossier /.emacs.d/
 
@@ -948,11 +951,4 @@ Petit truc plutôt cool qui affiche le temps de lancement dans le mini buffer.
 
 #+end_src
 
-*Attention:* sur mon PC portable j'ai un mode économie d'énergie qui a le facheux défaut de ralentir
-considérablement le temps de lancement d'Emacs en mode GUI. Le temps de lancement passe de 2s à plus de 5s.
-
-** Mode client
-
-#+begin_src emacs-lisp
-
-#+end_src
+*Attention:* sur mon PC portable j'ai un mode économie d'énergie qui a le facheux défaut de ralentir considérablement le temps de lancement d'Emacs en mode GUI. Le temps de lancement passe de 2s à plus de 5s.
