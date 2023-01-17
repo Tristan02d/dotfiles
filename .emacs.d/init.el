@@ -140,6 +140,9 @@
   :config
   (setq which-key-idle-delay 1))
 
+(set-face-attribute 'default nil
+                     :font "Ubuntu Mono")
+
 ;; Themes
 (use-package monokai-pro-theme)
 (use-package solo-jazz-theme)
@@ -298,8 +301,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
-  (efs/org-font-setup))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))))
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -435,7 +437,10 @@
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'org-make-toc)
+            (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
 (use-package org-make-toc)
 
