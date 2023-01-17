@@ -266,8 +266,10 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 * Police
 
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil
-                       :font "Ubuntu Mono")
+  (defun tr/set-faces ()
+    (set-face-attribute 'default nil
+                        :font "Ubuntu Mono"
+                        :height 128))
 
 #+end_src
 
@@ -308,10 +310,12 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
                 (lambda (frame)
                   (with-selected-frame frame
                     (tr/set-theme)
+                    (tr/set-faces)
                     (setq doom-modeline-icon t)
                     (toggle-frame-fullscreen))))
     (toggle-frame-fullscreen)
-    (tr/set-theme))
+    (tr/set-theme)
+    (tr/set-faces))
 #+end_src
 
 * All the icons

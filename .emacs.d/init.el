@@ -140,8 +140,10 @@
   :config
   (setq which-key-idle-delay 1))
 
-(set-face-attribute 'default nil
-                     :font "Ubuntu Mono")
+(defun tr/set-faces ()
+  (set-face-attribute 'default nil
+                      :font "Ubuntu Mono"
+                      :height 128))
 
 ;; Themes
 (use-package monokai-pro-theme)
@@ -167,10 +169,12 @@
               (lambda (frame)
                 (with-selected-frame frame
                   (tr/set-theme)
+                  (tr/set-faces)
                   (setq doom-modeline-icon t)
                   (toggle-frame-fullscreen))))
   (toggle-frame-fullscreen)
-  (tr/set-theme))
+  (tr/set-theme)
+  (tr/set-faces))
 
 (use-package all-the-icons)
 
