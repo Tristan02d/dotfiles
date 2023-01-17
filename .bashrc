@@ -118,12 +118,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# PATH
+# Nécessaire pour pyls et powerline
+export PATH="$PATH:/home/tristan/.local/bin/"
+
 # Powerline
 # uniquement si le terminal est ouvert en dehors d'Emacs
 
 if [[ "$INSIDE_EMACS" != 'vterm' ]]; then
 
-    export PATH="$PATH:/home/tristan/.local/bin/"
     export LC_ALL=en_US.UTF-8
     powerline-daemon -q
     POWERLINE_BASH_CONFIGURATION=1
