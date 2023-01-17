@@ -19,3 +19,5 @@ gnome*
 user-dirs*
 .gsd*
 mimeapps.list
+
+systemd/user/default.target.wants
