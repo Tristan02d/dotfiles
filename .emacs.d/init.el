@@ -437,13 +437,13 @@
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.dotfiles/emacs.org"))
+    (org-make-toc)
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (add-hook 'after-save-hook #'org-make-toc)
             (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
 (use-package org-make-toc)
@@ -525,10 +525,13 @@
 
 ;; Python --------------------------------------------------------------
 
-(use-package lsp-python-ms
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms) (lsp))))
+(use-package python-mode
+  :ensure nil
+  :hook (python-mode . lsp-deferred)
+  :custom
+  (python-shell-interpreter "python3")
+  (lsp-pyls-disable-warning t)
+  (lsp-pyls-server-command "/home/tristan/.local/bin/pyls"))
 
 ;; LaTeX ---------------------------------------------------------------
 
