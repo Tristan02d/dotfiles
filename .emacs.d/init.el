@@ -530,7 +530,6 @@
   :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3")
-  (lsp-pyls-disable-warning t)
   (lsp-pyls-server-command "/home/tristan/.local/bin/pyls"))
 
 ;; LaTeX ---------------------------------------------------------------
@@ -546,8 +545,7 @@
 ;; Java ----------------------------------------------------------------
 
 (use-package lsp-java
-  :hook (java-mode .
-		   (lambda () (require 'lsp-java) (lsp))))
+  :hook (java-mode . lsp-deferred))
 
 ;; Terminal ------------------------------------------------------------
 
