@@ -52,83 +52,20 @@
 (setq use-package-always-ensure t)
 
 ;; Raccourcis clavier
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-  (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
-  (global-set-key (kbd "M-C-l") 'load-theme)
-  (global-set-key (kbd "M-C-v") 'eval-region)
-  (global-set-key (kbd "M-C-g a") 'org-agenda)
-  (global-set-key (kbd "M-C-g c") 'org-capture)
-  (global-set-key (kbd "C-x K") 'kill-current-buffer)
-  (global-set-key (kbd "C-$") 'delete-other-windows)
+(global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
+(global-set-key (kbd "M-C-v") 'eval-region)
+(global-set-key (kbd "M-C-g a") 'org-agenda)
+(global-set-key (kbd "M-C-g c") 'org-capture)
+(global-set-key (kbd "C-x K") 'kill-current-buffer)
+(global-set-key (kbd "C-$") 'delete-other-windows)
 
-  ;; Mettre automatiquement les parenthèses fermantes
-  (electric-pair-mode 1)
+;; Mettre automatiquement les parenthèses fermantes
+(electric-pair-mode 1)
 
-  ;; Ne pas confirmer la fermeture des buffers ayant un processus
-  (setq kill-buffer-query-functions nil)
-
-;; (defun dw/evil-hook ()
-;;   (dolist (mode '(custom-mode
-;;                   eshell-mode
-;;                   git-rebase-mode
-;;                   erc-mode
-;;                   circe-server-mode
-;;                   circe-chat-mode
-;;                   circe-query-mode
-;;                   sauron-mode
-;;                   term-mode))
-;;   (add-to-list 'evil-emacs-state-modes mode)))
-
-;; (defun dw/dont-arrow-me-bro ()
-;;   (interactive)
-;;   (message "Arrow keys are bad, you know?"))
-
-;; (use-package undo-tree
-;;   :init
-;;   (global-undo-tree-mode 1))
-
-;; (use-package evil
-;;   :init
-;;   (setq evil-want-integration t)
-;;   (setq evil-want-keybinding nil)
-;;   (setq evil-want-C-u-scroll t)
-;;   (setq evil-want-C-i-jump nil)
-;;   (setq evil-respect-visual-line-mode t)
-;;   (setq evil-undo-system 'undo-tree)
-;;   :config
-;;   (add-hook 'evil-mode-hook 'dw/evil-hook)
-;;   (evil-mode 1)
-;;   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-;;   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-;;   ;; Use visual line motions even outside of visual-line-mode buffers
-;;   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-;;   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-;;     ;; Disable arrow keys in normal and visual modes
-;;     ;; (define-key evil-normal-state-map (kbd "<left>") 'dw/dont-arrow-me-bro)
-;;     ;; (define-key evil-normal-state-map (kbd "<right>") 'dw/dont-arrow-me-bro)
-;;     ;; (define-key evil-normal-state-map (kbd "<down>") 'dw/dont-arrow-me-bro)
-;;     ;; (define-key evil-normal-state-map (kbd "<up>") 'dw/dont-arrow-me-bro)
-;;     ;; (evil-global-set-key 'motion (kbd "<left>") 'dw/dont-arrow-me-bro)
-;;     ;; (evil-global-set-key 'motion (kbd "<right>") 'dw/dont-arrow-me-bro)
-;;     ;; (evil-global-set-key 'motion (kbd "<down>") 'dw/dont-arrow-me-bro)
-;;     ;; (evil-global-set-key 'motion (kbd "<up>") 'dw/dont-arrow-me-bro)
-
-;;   (evil-set-initial-state 'messages-buffer-mode 'normal)
-;;   (evil-set-initial-state 'dashboard-mode 'normal))
-
-;; (use-package evil-collection
-;;   :after evil
-;;   :init
-;;   (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
-;;   :custom
-;;   (evil-collection-outline-bind-tab-p nil)
-;;   :config
-;;   (delete 'lispy evil-collection-mode-list)
-;;   (delete 'org-present evil-collection-mode-list)
-;;   (evil-collection-init))
+;; Ne pas confirmer la fermeture des buffers ayant un processus
+(setq kill-buffer-query-functions nil)
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering)
@@ -244,6 +181,7 @@
          ("C-x b" . counsel-ibuffer)
          ("C-x C-f" . counsel-find-file)
          ("C-M-j" . counsel-switch-buffer)
+         ("C-M-l" . counsel-load-theme)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history)))
 
@@ -418,10 +356,10 @@
 
 (with-eval-after-load 'org
   (org-babel-do-load-languages
-      'org-babel-load-languages
-      '((emacs-lisp . t)
-        (C . t)
-        (shell . t)))
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (C . t)
+     (shell . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
@@ -433,20 +371,17 @@
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("cc" . "src C")))
 
-;; Automatically tangle our emacs.org config file when we save it
+;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.dotfiles/emacs.org"))
-    (org-make-toc)
+  (when (string-equal buffer-file-name "/home/tristan/.dotfiles/emacs.org")
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
-(use-package org-make-toc)
+(use-package org-make-toc
+:hook (org-mode . org-make-toc-mode))
 
 (use-package markdown-mode
   :ensure nil
@@ -546,6 +481,8 @@
 
 (use-package lsp-java
   :hook (java-mode . lsp-deferred))
+
+(add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
 ;; Terminal ------------------------------------------------------------
 
