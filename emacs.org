@@ -822,8 +822,6 @@ requièrent quelques manipulations afin de pouvoir être supportés.
 
 ** Python
 
-*Section encore en travaux.*
-
 #+begin_src emacs-lisp
   ;; Python --------------------------------------------------------------
 
@@ -832,7 +830,6 @@ requièrent quelques manipulations afin de pouvoir être supportés.
     :hook (python-mode . lsp-deferred)
     :custom
     (python-shell-interpreter "python3")
-    (setq lsp-pyls-disable-warning t)
     (lsp-pyls-server-command "/home/tristan/.local/bin/pyls"))
 
 #+end_src
@@ -871,14 +868,11 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 ** Java
 
-*Section encore en travaux.*
-
 #+begin_src emacs-lisp
 ;; Java ----------------------------------------------------------------
 
 (use-package lsp-java
-  :hook (java-mode .
-		   (lambda () (require 'lsp-java) (lsp))))
+  :hook (java-mode . lsp-deferred))
 
 #+end_src
 
