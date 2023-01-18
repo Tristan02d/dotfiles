@@ -16,6 +16,8 @@
   - [[#numéros-de-lignes][Numéros de lignes]]
 - [[#réglages-pour-les-packages][Réglages pour les packages]]
 - [[#raccourcis-clavier][Raccourcis clavier]]
+- [[#evil-mode][Evil-mode]]
+- [[#savehist][Savehist]]
 - [[#no-littering][No littering]]
 - [[#which-key][Which-key]]
 - [[#police][Police]]
@@ -243,6 +245,63 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 
 #+end_src
 
+* Evil-mode
+
+Package servant à gérer les raccourcis clavier.
+
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :init
+    (global-undo-tree-mode 1))
+
+  (defun dw/dont-arrow-me-bro ()
+    (interactive)
+    (message "Arrow keys are bad, you know?"))
+
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-respect-visual-line-mode t)
+    (setq evil-undo-system 'undo-tree)
+    :config
+    (evil-mode 1)
+
+    ;; Use visual line motions even outside of visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+    ;; Disable arrow keys in normal and visual modes
+    ;; (define-key evil-normal-state-map (kbd "<left>") 'dw/dont-arrow-me-bro)
+    ;; (define-key evil-normal-state-map (kbd "<right>") 'dw/dont-arrow-me-bro)
+    ;; (define-key evil-normal-state-map (kbd "<down>") 'dw/dont-arrow-me-bro)
+    ;; (define-key evil-normal-state-map (kbd "<up>") 'dw/dont-arrow-me-bro)
+    ;; (evil-global-set-key 'motion (kbd "<left>") 'dw/dont-arrow-me-bro)
+    ;; (evil-global-set-key 'motion (kbd "<right>") 'dw/dont-arrow-me-bro)
+    ;; (evil-global-set-key 'motion (kbd "<down>") 'dw/dont-arrow-me-bro)
+    ;; (evil-global-set-key 'motion (kbd "<up>") 'dw/dont-arrow-me-bro)
+
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+
+#+end_src
+
+* Savehist
+
+#+begin_src emacs-lisp
+
+(use-package savehist
+  :config
+  (setq history-length 25)
+  (savehist-mode 1))
+
+#+end_src
+
 * No littering
 
 #+begin_src emacs-lisp
@@ -339,7 +398,10 @@ Naviguer entre les fichiers plus facilement.
     :commands (dired dired-jump)
     :bind (("C-x C-j" . dired-jump))
     :custom ((dired-listing-switches "-agho --group-directories-first")
-             (dired-kill-when-opening-new-dired-buffer t)))
+             (dired-kill-when-opening-new-dired-buffer t)
+             (evil-collection-define-key 'normal 'dired-mode-map
+                                         "h" 'dired-single-up-directory
+                                         "l" 'dired-single-buffer)))
 
   (use-package all-the-icons-dired
     :after dired
