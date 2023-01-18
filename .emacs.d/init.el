@@ -55,7 +55,6 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (global-set-key (kbd "M-C-c") 'comment-or-uncomment-region)
-(global-set-key (kbd "M-C-l") 'load-theme)
 (global-set-key (kbd "M-C-v") 'eval-region)
 (global-set-key (kbd "M-C-g a") 'org-agenda)
 (global-set-key (kbd "M-C-g c") 'org-capture)
@@ -182,6 +181,7 @@
          ("C-x b" . counsel-ibuffer)
          ("C-x C-f" . counsel-find-file)
          ("C-M-j" . counsel-switch-buffer)
+         ("C-M-l" . counsel-load-theme)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history)))
 
