@@ -101,14 +101,16 @@
     )
   )
 
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                  (tr/set-theme)
-                  (tr/set-faces)
-                  (setq doom-modeline-icon t)
-                  (toggle-frame-fullscreen))))
+(defun tr/emacs-client-frame-setup ()
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (tr/set-theme)
+                (tr/set-faces)
+                (setq doom-modeline-icon t)
+                (toggle-frame-fullscreen)))))
+
+(defun tr/emacs-gui-frame-setup ()
   (toggle-frame-fullscreen)
   (tr/set-theme)
   (tr/set-faces))
@@ -526,8 +528,30 @@
 
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (message "Emacs lancé en  %s."
+            (message "Emacs (GUI) lancé en  %s."
                      (format "%.2f secondes"
 			     (float-time
-			      (time-subtract after-init-time before-init-time)))
-		     gcs-done)))
+			      (time-subtract after-init-time before-init-time))))))
+
+(defun tr/display-client-startup-time ()
+  (defvar before-frame-time)
+  (add-hook 'before-make-frame-hooks '(setq before-frame-time (current-time)))
+  (add-hook 'after-make-frame-hooks
+            (lambda (frame)
+              (with-selected-frame frame
+                (message "Emacs (client) lancé en %s."
+                     (format "%.2f secondes"
+                             (float-time
+                              (time-subtract
+                               (current-time) before-frame-time))))))))
+
+(defun tr/emacs-client-setup ()
+  (tr/emacs-client-frame-setup)
+  (tr/display-client-startup-time))
+
+(defun tr/emacs-gui-setup ()
+  (tr/emacs-gui-frame-setup))
+
+(if (daemonp)
+    (tr/emacs-client-setup)
+  (tr/emacs-gui-setup))

@@ -61,6 +61,8 @@
   - [[#magit-todos][Magit-todos]]
 - [[#afficher-le-temps-de-lancement][Afficher le temps de lancement]]
   - [[#mode-gui][Mode GUI]]
+  - [[#mode-client][Mode client]]
+  - [[#faire-ce-quil-faut-selon-le-type-de-lancement][Faire ce qu'il faut selon le type de lancement]]
 :END:
 
 * Démarrage (un peu) plus rapide
@@ -242,17 +244,20 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 ** Chargement du theme et fenêtre en plein écran
 
 #+begin_src emacs-lisp
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (tr/set-theme)
-                    (tr/set-faces)
-                    (setq doom-modeline-icon t)
-                    (toggle-frame-fullscreen))))
+  (defun tr/emacs-client-frame-setup ()
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (tr/set-theme)
+                  (tr/set-faces)
+                  (setq doom-modeline-icon t)
+                  (toggle-frame-fullscreen)))))
+
+  (defun tr/emacs-gui-frame-setup ()
     (toggle-frame-fullscreen)
     (tr/set-theme)
     (tr/set-faces))
+
 #+end_src
 
 * All the icons
@@ -747,11 +752,11 @@ requièrent quelques manipulations afin de pouvoir être supportés.
 ** C/C++
 
 #+begin_src emacs-lisp
-;; C -------------------------------------------------------------------
-
-(use-package ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp))))
+  ;; C -------------------------------------------------------------------
+  
+  (use-package ccls
+    :hook ((c-mode c++-mode objc-mode cuda-mode) .
+           (lambda () (require 'ccls) (lsp))))
 
 #+end_src
 
@@ -897,12 +902,45 @@ Petit truc plutôt cool qui affiche le temps de lancement dans le mini buffer.
 
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (message "Emacs lancé en  %s."
+            (message "Emacs (GUI) lancé en  %s."
                      (format "%.2f secondes"
 			     (float-time
-			      (time-subtract after-init-time before-init-time)))
-		     gcs-done)))
+			      (time-subtract after-init-time before-init-time))))))
 
 #+end_src
 
+** Mode client
+
+*Ne fonctionne par pour le moment.*
+
+#+begin_src emacs-lisp
+  (defun tr/display-client-startup-time ()
+    (defvar before-frame-time)
+    (add-hook 'before-make-frame-hooks '(setq before-frame-time (current-time)))
+    (add-hook 'after-make-frame-hooks
+              (lambda (frame)
+                (with-selected-frame frame
+                  (message "Emacs (client) lancé en %s."
+                       (format "%.2f secondes"
+                               (float-time
+                                (time-subtract
+                                 (current-time) before-frame-time))))))))
+#+end_src
+
 *Attention:* sur mon PC portable j'ai un mode économie d'énergie qui a le facheux défaut de ralentir considérablement le temps de lancement d'Emacs en mode GUI. Le temps de lancement passe de 2s à plus de 5s.
+
+** Faire ce qu'il faut selon le type de lancement
+
+#+begin_src emacs-lisp
+  (defun tr/emacs-client-setup ()
+    (tr/emacs-client-frame-setup)
+    (tr/display-client-startup-time))
+
+  (defun tr/emacs-gui-setup ()
+    (tr/emacs-gui-frame-setup))
+
+  (if (daemonp)
+      (tr/emacs-client-setup)
+    (tr/emacs-gui-setup))
+  
+#+end_src
