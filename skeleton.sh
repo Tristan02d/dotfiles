@@ -95,7 +95,8 @@ if [ "$filename" = "Makefile" ]
 then
     echo "Quel type de Makefile voulez-vous créer"
 else
-    
+    echo
+fi
 
 # Début du code principal
 
