@@ -22,3 +22,4 @@ mimeapps.list
 
 systemd/user/default.target.wants
 evince/
+htop/
