@@ -224,6 +224,10 @@
   :init
   (ivy-rich-mode 1))
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-ibuffer)
@@ -440,6 +444,8 @@
 (use-package markdown-mode
   :ensure nil
   :hook (markdown-mode . efs/visual-fill))
+
+(use-package grip-mode)
 
 ;; Complétion de code et autres ----------------------------------------
 

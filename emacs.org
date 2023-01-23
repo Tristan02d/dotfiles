@@ -42,6 +42,7 @@
   - [[#org-babel][Org babel]]
   - [[#org-make-toc][Org-make-toc]]
 - [[#markdown][Markdown]]
+- [[#grip-mode][Grip-mode]]
 - [[#complétion-de-code-et-autres][Complétion de code et autres]]
   - [[#yasnippet][Yasnippet]]
   - [[#lsp][Lsp]]
@@ -403,28 +404,32 @@ Colore les parenthèses en arc-en-ciel pour reconnaître les paires.
 de  base comme par exemple le ~C-s~ pour chercher un mot dans un fichier.
 
 #+begin_src emacs-lisp
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
+  (use-package ivy
+    :diminish
+    :bind (("C-s" . swiper)
+           :map ivy-minibuffer-map
+           ("TAB" . ivy-alt-done)
+           ("C-l" . ivy-alt-done)
+           ("C-j" . ivy-next-line)
+           ("C-k" . ivy-previous-line)
+           :map ivy-switch-buffer-map
+           ("C-k" . ivy-previous-line)
+           ("C-l" . ivy-done)
+           ("C-d" . ivy-switch-buffer-kill)
+           :map ivy-reverse-i-search-map
+           ("C-k" . ivy-previous-line)
+           ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
+  (use-package ivy-rich
+    :after ivy
+    :init
+    (ivy-rich-mode 1))
+
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
 
 #+end_src
 
@@ -705,6 +710,14 @@ centrer les buffers markdown. Souvent, les fichiers markdown finissent en /.md/.
     :ensure nil
     :hook (markdown-mode . efs/visual-fill))
   
+#+end_src
+
+* Grip-mode
+
+Permet d'avoir une preview des fichiers README de GitHub.
+
+#+begin_src emacs-lisp
+  (use-package grip-mode)
 #+end_src
 
 * Complétion de code et autres
