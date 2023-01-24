@@ -56,6 +56,7 @@
   - [[#bash][Bash]]
   - [[#java][Java]]
   - [[#emacs-lisp][Emacs-lisp]]
+  - [[#c][C#]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -203,6 +204,7 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
   (use-package evil
     :init
     (setq evil-undo-system 'undo-tree)
+    (setq evil-want-keybinding nil)
     :config
     (evil-mode 1)
 
@@ -846,7 +848,7 @@ requièrent quelques manipulations afin de pouvoir être supportés.
     :hook (python-mode . lsp-deferred)
     :custom
     (python-shell-interpreter "python3")
-    (lsp-pyls-server-command "/home/tristan/.local/bin/pyls"))
+    (lsp-pyls-server-command "/home/tristan/.local/bin/pylsp"))
 
 #+end_src
 
@@ -896,6 +898,14 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 #+begin_src emacs-lisp
   (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+#+end_src
+
+** C#
+
+#+begin_src emacs-lisp
+(use-package csharp-mode
+  :hook (csharp-mode . lsp-deferred))
+
 #+end_src
 
 * Terminal

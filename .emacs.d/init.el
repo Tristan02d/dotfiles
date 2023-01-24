@@ -78,6 +78,7 @@
 (use-package evil
   :init
   (setq evil-undo-system 'undo-tree)
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
 
@@ -525,7 +526,7 @@
   :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3")
-  (lsp-pyls-server-command "/home/tristan/.local/bin/pyls"))
+  (lsp-pyls-server-command "/home/tristan/.local/bin/pylsp"))
 
 ;; LaTeX ---------------------------------------------------------------
 
@@ -543,6 +544,9 @@
   :hook (java-mode . lsp-deferred))
 
 (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+
+(use-package csharp-mode
+  :hook (csharp-mode . lsp-deferred))
 
 ;; Terminal ------------------------------------------------------------
 
