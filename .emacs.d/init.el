@@ -79,6 +79,8 @@
   :init
   (setq evil-undo-system 'undo-tree)
   (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
+  (setq evil-want-C-i-jump nil)
   :config
   (evil-mode 1)
 
@@ -101,13 +103,13 @@
 
 (use-package evil-collection
   :after evil
-  :init
-  (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
-  :custom
-  (evil-collection-outline-bind-tab-p nil)
+  ;; :init
+  ;; (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
+  ;; :custom
+  ;; (evil-collection-outline-bind-tab-p nil)
   :config
-  (delete 'lispy evil-collection-mode-list)
-  (delete 'org-present evil-collection-mode-list)
+  ;; (delete 'lispy evil-collection-mode-list)
+  ;; (delete 'org-present evil-collection-mode-list)
   (evil-collection-init))
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
@@ -163,12 +165,14 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first")
-           (dired-kill-when-opening-new-dired-buffer t)
-           (evil-collection-define-key 'normal 'dired-mode-map
-             "h" 'dired-single-up-directory
-             "l" 'dired-single-buffer)))
+  :config
+  (setq dired-listing-switches "-agho --group-directories-first"
+        dired-kill-when-opening-new-dired-buffer t
+        dired-omit-mode t)
+
+  (evil-collection-define-key 'normal 'dired-mode-map
+                              "h" 'dired-single-up-directory
+                              "l" 'dired-single-buffer))
 
 (use-package all-the-icons-dired
   :after dired
@@ -355,8 +359,6 @@
            ((todo "NEXT"
                   ((org-agenda-overriding-header "Next Tasks")))))
 
-          ("W" "Work Tasks" tags-todo "+work-email")
-
           ;; Low-effort next actions
           ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
            ((org-agenda-overriding-header "Low Effort Tasks")
@@ -393,7 +395,7 @@
 
   (setq org-capture-templates
         `(("t" "Tasks / Projects")
-          ("tt" "Task" entry (file+olp "~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+          ("tt" "Task" entry (file+olp "~/projets/truc.org" "Inbox")
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
 
   (efs/org-font-setup))
