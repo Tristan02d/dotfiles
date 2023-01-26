@@ -187,11 +187,12 @@
 (use-package diminish)
 
 (use-package doom-modeline
+:init
+(setq doom-modeline-buffer-encoding nil)
 :custom
 (display-time-mode 1)
 (display-battery-mode 1)
 (doom-modeline-height 1)
-(setq doom-modeline-buffer-encoding nil)
 (doom-modeline-mode 1))
 
 (use-package expand-region
