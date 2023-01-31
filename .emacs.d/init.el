@@ -551,7 +551,11 @@
 (use-package csharp-mode
   :hook (csharp-mode . lsp-deferred))
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :hook (typescript-mode . lsp-deferred))
+
+(use-package js2-mode
+  :hook (js2-mode . lsp-deferred))
 
 ;; Terminal ------------------------------------------------------------
 
