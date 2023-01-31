@@ -918,13 +918,15 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 #+begin_src emacs-lisp
 (use-package typescript-mode
   :hook (typescript-mode . lsp-deferred))
+
 #+end_src
 
 ** JavaScript
 
 #+begin_src emacs-lisp
 (use-package js2-mode
-  :hook (js2-mode . lsp-deferred))
+  :hook (js-mode . lsp-deferred))
+
 #+end_src
 
 * Terminal

@@ -555,7 +555,7 @@
   :hook (typescript-mode . lsp-deferred))
 
 (use-package js2-mode
-  :hook (js2-mode . lsp-deferred))
+  :hook (js-mode . lsp-deferred))
 
 ;; Terminal ------------------------------------------------------------
 
