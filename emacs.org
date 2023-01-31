@@ -57,6 +57,7 @@
   - [[#java][Java]]
   - [[#emacs-lisp][Emacs-lisp]]
   - [[#c][C#]]
+  - [[#typescript][TypeScript]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -909,6 +910,12 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 (use-package csharp-mode
   :hook (csharp-mode . lsp-deferred))
 
+#+end_src
+
+** TypeScript
+
+#+begin_src emacs-lisp
+(use-package typescript-mode)
 #+end_src
 
 * Terminal

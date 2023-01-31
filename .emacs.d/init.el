@@ -551,6 +551,8 @@
 (use-package csharp-mode
   :hook (csharp-mode . lsp-deferred))
 
+(use-package typescript-mode)
+
 ;; Terminal ------------------------------------------------------------
 
 ;; eshell
