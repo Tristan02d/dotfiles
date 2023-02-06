@@ -526,10 +526,13 @@
 
 (use-package python-mode
   :ensure nil
-  :hook (python-mode . lsp-deferred)
   :custom
-  (python-shell-interpreter "python3")
-  (lsp-pyls-server-command "/home/tristan/.local/bin/pylsp"))
+    (python-shell-interpreter "python3"))
+
+  (use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+    (require 'lsp-pyright)
+    (lsp-deferred))))
 
 ;; LaTeX ---------------------------------------------------------------
 
