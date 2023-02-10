@@ -557,6 +557,10 @@
 (use-package js2-mode
   :hook (js-mode . lsp-deferred))
 
+(auto-insert-mode 1)
+
+(use-package yatemplate)
+
 ;; Terminal ------------------------------------------------------------
 
 ;; eshell

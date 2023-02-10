@@ -59,6 +59,7 @@
   - [[#c][C#]]
   - [[#typescript][TypeScript]]
   - [[#javascript][JavaScript]]
+- [[#templates-de-fichiers][Templates de fichiers]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -927,6 +928,14 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 (use-package js2-mode
   :hook (js-mode . lsp-deferred))
 
+#+end_src
+
+* Templates de fichiers
+
+#+begin_src emacs-lisp
+(auto-insert-mode 1)
+
+(use-package yatemplate)
 #+end_src
 
 * Terminal
