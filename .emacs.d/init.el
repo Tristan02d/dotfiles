@@ -559,7 +559,9 @@
 
 (auto-insert-mode 1)
 
-(use-package yatemplate)
+(use-package yatemplate
+  :config
+  (yatemplate-fill-alist))
 
 ;; Terminal ------------------------------------------------------------
 
