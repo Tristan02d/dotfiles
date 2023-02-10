@@ -835,7 +835,7 @@ requièrent quelques manipulations afin de pouvoir être supportés.
 ** C/C++
 
 #+begin_src emacs-lisp
-  ;; C -------------------------------------------------------------------
+;; C -------------------------------------------------------------------
   
   (use-package ccls
     :hook ((c-mode c++-mode objc-mode cuda-mode) .
@@ -848,15 +848,12 @@ requièrent quelques manipulations afin de pouvoir être supportés.
 #+begin_src emacs-lisp
   ;; Python --------------------------------------------------------------
 
-  (use-package python-mode
-    :ensure nil
-    :custom
-      (python-shell-interpreter "python3"))
+(setq python-shell-interpreter "python3")
 
-    (use-package lsp-pyright
-    :hook (python-mode . (lambda ()
-      (require 'lsp-pyright)
-      (lsp-deferred))))
+(use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp-deferred))))
 
 #+end_src
 

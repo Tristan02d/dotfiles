@@ -517,22 +517,19 @@
   :config (helm-mode))
 
 ;; C -------------------------------------------------------------------
-
-(use-package ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp))))
+  
+  (use-package ccls
+    :hook ((c-mode c++-mode objc-mode cuda-mode) .
+           (lambda () (require 'ccls) (lsp))))
 
 ;; Python --------------------------------------------------------------
 
-(use-package python-mode
-  :ensure nil
-  :custom
-    (python-shell-interpreter "python3"))
+(setq python-shell-interpreter "python3")
 
-  (use-package lsp-pyright
+(use-package lsp-pyright
   :hook (python-mode . (lambda ()
-    (require 'lsp-pyright)
-    (lsp-deferred))))
+                          (require 'lsp-pyright)
+                          (lsp-deferred))))
 
 ;; LaTeX ---------------------------------------------------------------
 
