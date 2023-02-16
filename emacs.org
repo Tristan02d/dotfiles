@@ -50,7 +50,7 @@
   - [[#flycheck][Flycheck]]
   - [[#helm][Helm]]
 - [[#configuration-des-langages][Configuration des langages]]
-  - [[#cc][C/C++]]
+  - [[#c][C]]
   - [[#python][Python]]
   - [[#latex][LaTeX]]
   - [[#bash][Bash]]
@@ -537,7 +537,7 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
                     (org-level-6 . 1.1)
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))))
+      (set-face-attribute (car face) nil :font "Ubuntu Mono" :weight 'regular :height (cdr face))))
 
   (defun efs/org-font-setup ()
     ;; Replace list hyphen with dot
@@ -833,14 +833,12 @@ Le package /lsp-mode/ installé plus haut dans la section [[#lsp][Lsp]] s'appliq
 Certains, comme le C, ne requièrent pas de configuration externe à Emacs. D'autres, comme LaTeX,
 requièrent quelques manipulations afin de pouvoir être supportés.
 
-** C/C++
+** C
 
 #+begin_src emacs-lisp
-;; C -------------------------------------------------------------------
-  
-  (use-package ccls
-    :hook ((c-mode c++-mode objc-mode cuda-mode) .
-           (lambda () (require 'ccls) (lsp))))
+  ;; C -------------------------------------------------------------------
+
+  (add-hook 'c-mode-hook 'lsp-deferred) 
 
 #+end_src
 
