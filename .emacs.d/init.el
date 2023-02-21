@@ -266,7 +266,8 @@
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/projets/")
     (setq projectile-project-search-path '("~/projets/")))
-  (setq projectile-switch-project-action #'projectile-dired))
+  (setq projectile-switch-project-action #'projectile-dired)
+  (projectile-cleanup-known-projects))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
@@ -327,8 +328,8 @@
   (setq org-log-into-drawer t)
 
   (setq org-agenda-files
-        '("~/.dotfiles/agenda.org"
-          "~/projets/tristank/TODO.org"))
+        '("~/.dotfiles"
+          "~/projets/*"))
 
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
