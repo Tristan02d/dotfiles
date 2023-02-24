@@ -59,17 +59,12 @@
 (global-set-key (kbd "M-C-g a") 'org-agenda)
 (global-set-key (kbd "M-C-g c") 'org-capture)
 (global-set-key (kbd "C-x K") 'kill-current-buffer)
-(global-set-key (kbd "C-$") 'delete-other-windows)
 
 ;; Mettre automatiquement les parenthèses fermantes
 (electric-pair-mode 1)
 
 ;; Ne pas confirmer la fermeture des buffers ayant un processus
 (setq kill-buffer-query-functions nil)
-
-(defun dw/dont-arrow-me-bro ()
-  (interactive)
-  (message "Arrow keys are bad, you know?"))
 
 (use-package undo-tree
   :init
@@ -88,28 +83,13 @@
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  ;; Disable arrow keys in normal and visual modes
-  ;;   (define-key evil-normal-state-map (kbd "<left>") 'dw/dont-arrow-me-bro)
-  ;;   (define-key evil-normal-state-map (kbd "<right>") 'dw/dont-arrow-me-bro)
-  ;;   (define-key evil-normal-state-map (kbd "<down>") 'dw/dont-arrow-me-bro)
-  ;;   (define-key evil-normal-state-map (kbd "<up>") 'dw/dont-arrow-me-bro)
-  ;;   (evil-global-set-key 'motion (kbd "<left>") 'dw/dont-arrow-me-bro)
-  ;;   (evil-global-set-key 'motion (kbd "<right>") 'dw/dont-arrow-me-bro)
-  ;;   (evil-global-set-key 'motion (kbd "<down>") 'dw/dont-arrow-me-bro)
-  ;;   (evil-global-set-key 'motion (kbd "<up>") 'dw/dont-arrow-me-bro)
-
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+  (evil-set-initial-state 'vterm-mode 'insert))
 
 (use-package evil-collection
   :after evil
-  ;; :init
-  ;; (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
-  ;; :custom
-  ;; (evil-collection-outline-bind-tab-p nil)
   :config
-  ;; (delete 'lispy evil-collection-mode-list)
-  ;; (delete 'org-present evil-collection-mode-list)
   (evil-collection-init))
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
