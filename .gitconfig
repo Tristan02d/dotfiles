@@ -5,11 +5,5 @@
         sslVerify = false
 [color]
         ui = auto
-[alias]
-        st = status
-        co = checkout
-        br = branch
 [push]
         default = simple
-[credential]
-        helper = cache
