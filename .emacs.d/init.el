@@ -85,7 +85,9 @@
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
-  (evil-set-initial-state 'vterm-mode 'insert))
+
+  (evil-set-initial-state 'vterm-mode 'insert)
+  (evil-set-initial-state 'git-commit-mode 'insert))
 
 (use-package evil-collection
   :after evil
