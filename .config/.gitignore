@@ -24,3 +24,6 @@ systemd/user/default.target.wants
 evince/
 htop/
 inkscape
+menus
+yelp
+systemd
