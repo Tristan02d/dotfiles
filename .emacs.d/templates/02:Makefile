@@ -1,0 +1,12 @@
+#
+#  @filename `(file-name-nondirectory (buffer-file-name))`
+#  @date `(format-time-string "%A, %e %B %Y.")`
+#  @author Tristan Riehs <triehs@enseirb-matmeca.fr>
+#
+
+SRC_DIR = src
+SRC_FILES = $(wildcard)
+INCLUDE_DIR = $3
+
+CC = gcc
+CFLAGS = -std=c99 -Wall
