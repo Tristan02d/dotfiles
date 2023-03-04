@@ -1,15 +1,9 @@
 [user]
-        name = Tristan Riehs
+	name = Tristan Riehs
         email = tristan.riehs@bordeaux-inp.fr
 [http]
         sslVerify = false
 [color]
         ui = auto
-[alias]
-        st = status
-        co = checkout
-        br = branch
 [push]
         default = simple
-[credential]
-        helper = cache

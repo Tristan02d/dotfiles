@@ -182,7 +182,6 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
     (global-set-key (kbd "M-C-g a") 'org-agenda)
     (global-set-key (kbd "M-C-g c") 'org-capture)
     (global-set-key (kbd "C-x K") 'kill-current-buffer)
-    (global-set-key (kbd "C-$") 'delete-other-windows)
 
     ;; Mettre automatiquement les parenthèses fermantes
     (electric-pair-mode 1)
@@ -197,10 +196,6 @@ dépôt /org/ ne vous est pas nécessaire si vous n'utilisez pas le package /org
 Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut de Vim.
 
 #+begin_src emacs-lisp
-  (defun dw/dont-arrow-me-bro ()
-    (interactive)
-    (message "Arrow keys are bad, you know?"))
-
   (use-package undo-tree
     :init
     (global-undo-tree-mode 1))
@@ -218,28 +213,15 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
     (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-    ;; Disable arrow keys in normal and visual modes
-    ;;   (define-key evil-normal-state-map (kbd "<left>") 'dw/dont-arrow-me-bro)
-    ;;   (define-key evil-normal-state-map (kbd "<right>") 'dw/dont-arrow-me-bro)
-    ;;   (define-key evil-normal-state-map (kbd "<down>") 'dw/dont-arrow-me-bro)
-    ;;   (define-key evil-normal-state-map (kbd "<up>") 'dw/dont-arrow-me-bro)
-    ;;   (evil-global-set-key 'motion (kbd "<left>") 'dw/dont-arrow-me-bro)
-    ;;   (evil-global-set-key 'motion (kbd "<right>") 'dw/dont-arrow-me-bro)
-    ;;   (evil-global-set-key 'motion (kbd "<down>") 'dw/dont-arrow-me-bro)
-    ;;   (evil-global-set-key 'motion (kbd "<up>") 'dw/dont-arrow-me-bro)
-
     (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
+    (evil-set-initial-state 'dashboard-mode 'normal)
+
+    (evil-set-initial-state 'vterm-mode 'insert)
+    (evil-set-initial-state 'git-commit-mode 'insert))
 
   (use-package evil-collection
     :after evil
-    ;; :init
-    ;; (setq evil-collection-company-use-tng nil)  ;; Is this a bug in evil-collection?
-    ;; :custom
-    ;; (evil-collection-outline-bind-tab-p nil)
     :config
-    ;; (delete 'lispy evil-collection-mode-list)
-    ;; (delete 'org-present evil-collection-mode-list)
     (evil-collection-init))
 
 #+end_src
@@ -491,7 +473,8 @@ le projet en un simple raccourci clavier.
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/projets/")
     (setq projectile-project-search-path '("~/projets/")))
-  (setq projectile-switch-project-action #'projectile-dired))
+  (setq projectile-switch-project-action #'projectile-dired)
+  (projectile-cleanup-known-projects))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
@@ -569,8 +552,8 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
     (setq org-log-into-drawer t)
 
     (setq org-agenda-files
-          '("~/.dotfiles/agenda.org"
-            "~/projets/tristank/TODO.org"))
+          '("~/.dotfiles"
+            "~/projets/*"))
 
     (setq org-todo-keywords
           '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
