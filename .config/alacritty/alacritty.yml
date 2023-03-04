@@ -1,0 +1,18 @@
+font:
+  normal:
+    family: mononoki
+    style: Regular
+
+  bold:
+    family: mononoki
+    style: Bold
+
+  italic:
+    family: mononoki
+    style: Italic
+
+  bold_italic:
+    family: mononoki
+    style: BoldItalic
+
+  size: 11
