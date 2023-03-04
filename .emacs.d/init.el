@@ -555,6 +555,9 @@
 (use-package js2-mode
   :hook (js-mode . lsp-deferred))
 
+(use-package lsp-haskell)
+(add-hook 'haskell-mode-hook 'lsp-deferred)
+
 (auto-insert-mode 1)
 
 (use-package yatemplate

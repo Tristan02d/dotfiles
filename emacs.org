@@ -59,6 +59,7 @@
   - [[#c][C#]]
   - [[#typescript][TypeScript]]
   - [[#javascript][JavaScript]]
+  - [[#haskell][Haskell]]
 - [[#templates-de-fichiers][Templates de fichiers]]
 - [[#terminal][Terminal]]
   - [[#eshell][Eshell]]
@@ -928,14 +929,22 @@ buffer du script Bash, en faisant ~M-x~ puis ~lsp~ puis entrée.
 
 #+end_src
 
+** Haskell
+
+#+begin_src emacs-lisp
+  (use-package lsp-haskell)
+  (add-hook 'haskell-mode-hook 'lsp-deferred)
+#+end_src
+
 * Templates de fichiers
 
 #+begin_src emacs-lisp
-(auto-insert-mode 1)
+  (auto-insert-mode 1)
 
-(use-package yatemplate
-  :config
-  (yatemplate-fill-alist))
+  (use-package yatemplate
+    :config
+    (yatemplate-fill-alist))
+  
 #+end_src
 
 * Terminal
