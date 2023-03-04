@@ -1,7 +1,6 @@
 # définition de tous les alias bash
 
 alias c='clear'
-alias e='exit'
 
 # git
 
@@ -14,10 +13,6 @@ alias gpll='git pull'
 alias gd='git diff'
 alias gr='git rm'
 
-# skeleton
-
-alias sk='~/skeleton.sh'
-
 # Emacs
 
-alias emacs_c='emacsclient -c -a ~/.dotfiles/emacs.org &'
+alias vim='emacs -Q -nw'
