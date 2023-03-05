@@ -10,7 +10,7 @@
 - [[#table-des-matières][Table des matières]]
 - [[#démarrage-un-peu-plus-rapide][Démarrage (un peu) plus rapide]]
 - [[#démarrage-beaucoup-plus-rapide][Démarrage (beaucoup) plus rapide]]
-- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier .emacs.d]]
+- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier /.emacs.d/]]
 - [[#interface][Interface]]
   - [[#nettoyage][Nettoyage]]
   - [[#numéros-de-lignes][Numéros de lignes]]
@@ -249,10 +249,16 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
 * Police
 
 #+begin_src emacs-lisp
-  (defun tr/set-faces ()
-    (set-face-attribute 'default nil
-                        :font "Ubuntu Mono"
-                        :height 128))
+      (defun tr/set-faces ()
+        (set-face-attribute 'default nil
+                            :font "Mononoki"
+                            :height 128)
+        (set-face-attribute 'fixed-pitch nil
+                          :font "Mononoki"
+                          :height 128)
+        (set-face-attribute 'variable-pitch nil
+                          :font "Mononoki"
+                          :height 128))
 
 #+end_src
 

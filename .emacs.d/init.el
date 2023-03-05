@@ -106,8 +106,14 @@
 
 (defun tr/set-faces ()
   (set-face-attribute 'default nil
-                      :font "Ubuntu Mono"
-                      :height 128))
+                      :font "Mononoki"
+                      :height 128)
+  (set-face-attribute 'fixed-pitch nil
+                    :font "Mononoki"
+                    :height 128)
+  (set-face-attribute 'variable-pitch nil
+                    :font "Mononoki"
+                    :height 128))
 
 ;; Themes
 (use-package monokai-pro-theme)
