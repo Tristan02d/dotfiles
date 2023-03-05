@@ -2,6 +2,10 @@
 
 alias c='clear'
 
+# ls
+
+alias ll='ls -al'
+
 # git
 
 alias gs='git status'
