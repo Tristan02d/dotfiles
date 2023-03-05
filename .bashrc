@@ -35,9 +35,6 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # aliases
 if [ -f ~/.bash_aliases ]; then
@@ -67,3 +64,7 @@ if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
         tput clear;
     }
 fi
+
+# prompt
+
+export PS1="\\w \\$"
