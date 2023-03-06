@@ -87,7 +87,8 @@
   (evil-set-initial-state 'dashboard-mode 'normal)
 
   (evil-set-initial-state 'vterm-mode 'insert)
-  (evil-set-initial-state 'git-commit-mode 'insert))
+  (evil-set-initial-state 'git-commit-mode 'insert)
+  (evil-set-initial-state 'global-git-commit-mode 'insert))
 
 (use-package evil-collection
   :after evil
@@ -106,8 +107,14 @@
 
 (defun tr/set-faces ()
   (set-face-attribute 'default nil
-                      :font "Ubuntu Mono"
-                      :height 128))
+                      :font "Mononoki"
+                      :height 128)
+  (set-face-attribute 'fixed-pitch nil
+                    :font "Mononoki"
+                    :height 128)
+  (set-face-attribute 'variable-pitch nil
+                    :font "Mononoki"
+                    :height 128))
 
 ;; Themes
 (use-package monokai-pro-theme)
@@ -284,7 +291,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Ubuntu Mono" :weight 'regular :height (cdr face))))
+    (set-face-attribute (car face) nil :font "Mononoki" :weight 'regular :height (cdr face))))
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -297,7 +304,7 @@
   :commands (org-capture org-agenda)
   :config
   (setq org-support-shift-select t)
-  (setq org-ellipsis " ▾")
+  (setq org-ellipsis " ~")
 
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)

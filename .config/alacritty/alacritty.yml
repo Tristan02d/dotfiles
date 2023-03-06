@@ -16,7 +16,3 @@ font:
     style: BoldItalic
 
   size: 11
-
-import:
- - ~/.config/alacritty/themes/solo-jazz.yml
- 
