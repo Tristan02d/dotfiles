@@ -303,7 +303,7 @@
   :commands (org-capture org-agenda)
   :config
   (setq org-support-shift-select t)
-  (setq org-ellipsis " ▾")
+  (setq org-ellipsis " ~")
 
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)

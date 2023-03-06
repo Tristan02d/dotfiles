@@ -10,7 +10,7 @@
 - [[#table-des-matières][Table des matières]]
 - [[#démarrage-un-peu-plus-rapide][Démarrage (un peu) plus rapide]]
 - [[#démarrage-beaucoup-plus-rapide][Démarrage (beaucoup) plus rapide]]
-- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier /.emacs.d/]]
+- [[#nettoyage-du-dossier-emacsd][Nettoyage du dossier .emacs.d]]
 - [[#interface][Interface]]
   - [[#nettoyage][Nettoyage]]
   - [[#numéros-de-lignes][Numéros de lignes]]
@@ -545,7 +545,7 @@ Beaucoup de choses à dire, je vous invite à regarder [[https://www.youtube.com
     :commands (org-capture org-agenda)
     :config
     (setq org-support-shift-select t)
-    (setq org-ellipsis " ▾")
+    (setq org-ellipsis " ~")
 
     (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
     (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
