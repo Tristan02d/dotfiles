@@ -23,5 +23,5 @@ Vous êtes libres de copier ce que vous voulez dans ma config.
 * Ma configuration
 
 J'utilise cette config sur un ordinateur portable et un ordinateur fixe. Les deux machines
-fonctionnent sur Ubuntu, si ce n'est pas votre cas, il y aura sûrement des modifications à faire
-dans la config, en particulier si vous n'utilisez pas Linux.
+fonctionnent sur Arch, si ce n'est pas votre cas, il y aura sûrement des modifications à faire
+dans la config, surtout si vous n'utilisez pas Linux.
