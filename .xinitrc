@@ -28,7 +28,7 @@ fi
 export PATH="$PATH:$HOME/.local/bin"
 
 twm &
-nitrogen --restore &
+nitrogen --set-scaled --random $HOME/images/wallpapers/ &
 picom &
 xmobar &
 exec xmonad
