@@ -4,7 +4,7 @@ alias c='clear'
 
 # ls
 
-alias ll='ls -al'
+alias ll='ls -Algh'
 
 # git
 
