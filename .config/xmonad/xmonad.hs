@@ -26,9 +26,10 @@ myFocusedBorderColor = "#4682b4"
 -- DEMARRAGE
 
 myStartupHook = do
-  spawnOnce "nitrogen --restore &"
-  spawnOnce "picom &"
-  spawnOnce "emacs --daemon"
+  spawnOnce "nitrogen --set-scaled --random ~/images/wallpapers"
+  spawnOnce "picom"
+  spawnOnce "xmobar"
+  spawnOnce "emacs --daemon &"
 
 -- RACCOURCIS CLAVIER
 
@@ -38,7 +39,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Mononoki'")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -101,16 +102,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")]
     ++
 
-    [-- lancer emacs
-      ((modm,               xK_e), spawn "emacsclient -c -a 'emacs'")
-
-    -- lancer firefox
-    , ((modm,               xK_f), spawn "firefox")
-
-    -- charger le layout du clavier
-    , ((modm .|. shiftMask, xK_m), spawn "xmodmap ~/.Xmodmap")]
-    ++
-
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
@@ -137,7 +128,7 @@ myLayout = (spacingWithEdge 6 $ avoidStruts(tiled)) ||| noBorders Full
 
 
 
--- PARTIE PRINCIPALE
+-- MAIN SECTION
 
 defaults = def
   { terminal = myTerminal,
@@ -151,14 +142,17 @@ defaults = def
     startupHook = myStartupHook
   }
   `additionalKeysP`
-    [-- charger le layout du clavier
+    [-- load keyboard layout
       ("M-S-m", spawn "xmodmap ~/.Xmodmap"               )
 
-    -- lancer emacs
+    -- launch Emacs
     , ("M-e"  , spawn "emacsclient -c -a 'emacs'"        )
 
-    -- lancer firefox
+    -- launch Firefox
     , ("M-f"  , spawn "firefox"                          )
+
+    -- launch Discord
+    , ("M-d"  , spawn "discord")
     ]
 
 main = do

@@ -113,15 +113,12 @@
                     :font "Mononoki"
                     :height 128)
   (set-face-attribute 'variable-pitch nil
-                    :font "Mononoki"
+                    :font "Ubuntu"
                     :height 128))
 
 ;; Themes
 (use-package monokai-pro-theme)
 (use-package solo-jazz-theme)
-
-(advice-add 'rainbow-turn-on :after  #'solo-jazz-theme-rainbow-turn-on)
-(advice-add 'rainbow-turn-off :after #'solo-jazz-theme-rainbow-turn-off)
 
 ;; Récupérer l'heure qu'il est au lancement pour charger un theme en conséquence
 (defun tr/set-theme ()
@@ -291,7 +288,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Mononoki" :weight 'regular :height (cdr face))))
+    (set-face-attribute (car face) nil :font "Ubuntu" :weight 'regular :height (cdr face))))
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -304,7 +301,7 @@
   :commands (org-capture org-agenda)
   :config
   (setq org-support-shift-select t)
-  (setq org-ellipsis " ~")
+  (setq org-ellipsis " ▾")
 
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
   (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
