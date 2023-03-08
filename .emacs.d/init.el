@@ -119,7 +119,6 @@
 ;; Themes
 (use-package monokai-pro-theme)
 (use-package solo-jazz-theme)
-(load-file ~/projets/solo-jazz-emacs-theme/solo-jazz.el)
 
 ;; Récupérer l'heure qu'il est au lancement pour charger un theme en conséquence
 (defun tr/set-theme ()

@@ -271,7 +271,7 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
   ;; Themes
   (use-package monokai-pro-theme)
   (use-package solo-jazz-theme)
-  (load-file ~/projets/solo-jazz-emacs-theme/solo-jazz.el)
+
 #+end_src
 
 ** Charger le theme en fonction de l'heure de la journée
