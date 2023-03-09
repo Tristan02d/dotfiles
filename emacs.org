@@ -217,8 +217,7 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
     (evil-set-initial-state 'dashboard-mode 'normal)
 
     (evil-set-initial-state 'vterm-mode 'insert)
-    (evil-set-initial-state 'git-commit-mode 'insert)
-    (evil-set-initial-state 'global-git-commit-mode 'insert))
+    (evil-set-initial-state 'git-commit-mode 'insert))
 
   (use-package evil-collection
     :after evil
@@ -325,27 +324,32 @@ dans Emacs en faisant ~M-x~ puis en tapant la commande.
 Naviguer entre les fichiers plus facilement.
 
 #+begin_src emacs-lisp
-  (use-package dired
-    :ensure nil
-    :commands (dired dired-jump)
-    :config
-    (setq dired-listing-switches "-agho --group-directories-first"
-          dired-kill-when-opening-new-dired-buffer t
-          dired-omit-mode t)
+    (use-package dired
+      :ensure nil
+      :commands (dired dired-jump)
+      :config
+      (setq dired-listing-switches "-agho --group-directories-first"
+            dired-kill-when-opening-new-dired-buffer t
+            dired-omit-mode t)
 
-    (evil-collection-define-key 'normal 'dired-mode-map
-                                "h" 'dired-single-up-directory
-                                "l" 'dired-single-buffer))
+      (evil-collection-define-key 'normal 'dired-mode-map
+                                  "h" 'dired-single-up-directory
+                                  "l" 'dired-single-buffer))
 
-  (use-package all-the-icons-dired
-    :after dired
-    :hook (dired-mode . all-the-icons-dired-mode))
+    (use-package dired-single
+      :after dired)
 
-  (use-package dired-open
-    :after dired
-    :config
-    (setq dired-open-extensions '(("png" . "gimp")
-                                  ("pdf" . "evince"))))
+    (use-package all-the-icons-dired
+      :after dired
+      :hook (dired-mode . all-the-icons-dired-mode))
+
+    (use-package dired-open
+      :after dired
+      :config
+      (setq dired-open-extensions '(("png" . "gimp")
+                                    ("jpg" . "gimp")
+                                    ("svg" . "inkscape")
+                                    ("pdf" . "zathura"))))
 
 #+end_src
 
