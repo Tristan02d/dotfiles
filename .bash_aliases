@@ -1,6 +1,10 @@
-# définition de tous les alias bash
+# misc
 
 alias c='clear'
+
+# pacman
+
+alias p='sudo pacman -S'
 
 # ls
 
@@ -16,6 +20,11 @@ alias gc='git commit -m'
 alias gpll='git pull'
 alias gd='git diff'
 alias gr='git rm'
+
+# gcc
+# a couple of warnings that I personally consider as errors
+
+alias gcc='gcc -Werror=int-conversion -Werror=return-local-addr'
 
 # Emacs
 
