@@ -419,7 +419,8 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (C . t)
-     (shell . t)))
+     (shell . t)
+     (haskell . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
@@ -429,7 +430,8 @@
 
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("cc" . "src C")))
+  (add-to-list 'org-structure-template-alist '("cc" . "src C"))
+  (add-to-list 'org-structure-template-alist '("hs" . "src haskell")))
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
