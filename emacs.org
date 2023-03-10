@@ -34,6 +34,8 @@
 - [[#ivy][Ivy]]
 - [[#counsel-et-helpful][Counsel et helpful]]
 - [[#projectile][Projectile]]
+  - [[#latex][LaTeX]]
+  - [[#partie-principale][Partie principale]]
 - [[#org][Org]]
   - [[#fonctions][Fonctions]]
   - [[#partie-principale][Partie principale]]
@@ -470,6 +472,18 @@ contiennent du code, d'autres fichiers et des méthodes pour les lancer ou les c
 ajoute cette notion de projet dans Emacs, ce qui permet par la suite de pouvoir compiler ou lancer
 le projet en un simple raccourci clavier.
 
+** LaTeX
+
+#+begin_src emacs-lisp
+  (setq latex-viewer "zathura")
+
+  ;; (defun tr/projectile-show-paper ()
+  ;;   (interactive)
+  ;;   (shell-command latex-viewer))
+#+end_src
+
+** Partie principale
+
 #+begin_src emacs-lisp
 ;; Ajouter la notion de projet à Emacs
 (use-package projectile
@@ -490,7 +504,7 @@ le projet en un simple raccourci clavier.
 
 #+end_src
 
-*NB*: je mets personnellement mes projets dans ~~/projets/~, si ce n'est pas votre cas,
+*NB*: je mets personnellement mes projets dans ~$HOME/projets/~, si ce n'est pas votre cas,
 pensez à modifier ce paragraphe en conséquences.
 
 * Org

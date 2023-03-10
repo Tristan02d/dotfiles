@@ -245,6 +245,12 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+(setq latex-viewer "zathura")
+
+;; (defun tr/projectile-show-paper ()
+;;   (interactive)
+;;   (shell-command latex-viewer))
+
 ;; Ajouter la notion de projet à Emacs
 (use-package projectile
   :diminish projectile-mode
