@@ -116,8 +116,9 @@
                     :height 128))
 
 ;; Themes
-(use-package monokai-pro-theme)
-(use-package solo-jazz-theme)
+(use-package dracula-theme)
+(use-package solo-jazz-theme
+  :ensure nil)
 
 ;; Récupérer l'heure qu'il est au lancement pour charger un theme en conséquence
 (defun tr/set-theme ()
@@ -127,7 +128,7 @@
 
       (load-theme 'solo-jazz t)
 
-    (load-theme 'monokai-pro t)
+    (load-theme 'dracula t)
     )
   )
 
@@ -140,7 +141,7 @@
                 (setq doom-modeline-icon t)
                 (toggle-frame-fullscreen)))))
 
-(defun tr/emacs-gui-frame-setup ()
+(defun tr/emacs-frame-setup ()
   (toggle-frame-fullscreen)
   (tr/set-theme)
   (tr/set-faces))
@@ -627,9 +628,9 @@
   (tr/emacs-client-frame-setup)
   (tr/display-client-startup-time))
 
-(defun tr/emacs-gui-setup ()
-  (tr/emacs-gui-frame-setup))
+(defun tr/emacs-setup ()
+  (tr/emacs-frame-setup))
 
 (if (daemonp)
     (tr/emacs-client-setup)
-  (tr/emacs-gui-setup))
+  (tr/emacs-setup))

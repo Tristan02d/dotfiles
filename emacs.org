@@ -270,8 +270,9 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
 
 #+begin_src emacs-lisp
   ;; Themes
-  (use-package monokai-pro-theme)
-  (use-package solo-jazz-theme)
+  (use-package dracula-theme)
+  (use-package solo-jazz-theme
+    :ensure nil)
 
 #+end_src
 
@@ -286,7 +287,7 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
 
       (load-theme 'solo-jazz t)
 
-    (load-theme 'monokai-pro t)
+    (load-theme 'dracula t)
     )
   )
 
@@ -303,7 +304,7 @@ Permet de mieux gérer les raccourcis clavier. Ajoute les raccourcis par défaut
                   (setq doom-modeline-icon t)
                   (toggle-frame-fullscreen)))))
 
-  (defun tr/emacs-gui-frame-setup ()
+  (defun tr/emacs-frame-setup ()
     (toggle-frame-fullscreen)
     (tr/set-theme)
     (tr/set-faces))
@@ -1070,11 +1071,11 @@ Petit truc plutôt cool qui affiche le temps de lancement dans le mini buffer.
     (tr/emacs-client-frame-setup)
     (tr/display-client-startup-time))
 
-  (defun tr/emacs-gui-setup ()
-    (tr/emacs-gui-frame-setup))
+  (defun tr/emacs-setup ()
+    (tr/emacs-frame-setup))
 
   (if (daemonp)
       (tr/emacs-client-setup)
-    (tr/emacs-gui-setup))
+    (tr/emacs-setup))
   
 #+end_src
